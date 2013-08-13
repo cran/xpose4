@@ -1,7 +1,8 @@
-3d6e1b84422a2706dd91d5346b19b1f9 *DESCRIPTION
-ad768459201d5f5be8d275cac91729da *NAMESPACE
-8af910abc1b2d5072c93e9004d2c1a97 *inst/CITATION
-5d327cb470677f812c82c7893fa64f22 *inst/changelog.txt
-65b6b73ca13facddf8f7b87fa932d52e *inst/readme.txt
-4571ee6122d0ad4221fdddd3a113ab44 *inst/xpose.ini
-0659ae350cd10764a44543dd48b6745e *man/xpose4-package.Rd
+886bafcacc51fffdb5f7b88573761900 *DESCRIPTION
+63ce4151c078ef261e1780b2b6c24171 *NAMESPACE
+0fe20524c40c5a7d098c0f5408bebf1c *inst/CITATION
+6e74074646feb151e83478d0281e73bc *inst/NEWS
+6e74074646feb151e83478d0281e73bc *inst/changelog.txt
+333f198f1f4ecc3bbe7b15ad0707ae47 *inst/readme.txt
+63d236ebbfeba35aa8baf590357460ee *inst/xpose.ini
+a722697d719086adfd537fdc63608a1e *man/xpose4-package.Rd
