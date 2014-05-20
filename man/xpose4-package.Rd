@@ -24,19 +24,75 @@
 
 \name{xpose4-package}
 \alias{xpose4-package}
-\title{Xpose 4 Package}
+\alias{xpose4}
+\alias{xpose}
+\title{The Xpose Package}
 \docType{package}
 \description{
-  Xpose is an R-based model building aid for population analysis using
+ Xpose is an R-based model building aid for population analysis using
   NONMEM. It facilitates data set checkout, exploration and
   visualization, model diagnostics, candidate covariate identification
   and model comparison.
 }
-\details{ 
-  Xpose can be run in two different ways, using the classic menu system
-  and by using the command line in R. 
+\details{ Xpose is an R library for post-processing of NONMEM output. It takes one or more standard NONMEM table files as input and generates graphs or other analyses. It is assumed that each NONMEM run can be uniquely identified by a run number (see section below for how to generate the appropriate input to Xpose). Xpose is implemented using the lattice graphics library.
+
+The Xpose library can be divided up into five sub-sections: 
+
+\link{xpose4data-package}  Functions for managing the input data and manipulating the Xpose database.
+
+\link{xpose4generic-package} Generic wrapper functions around the lattice functions. These funtions can be invoked by the user but require quite detailed instructions to generate the desired output.
+
+\link{xpose4specific-package} These functions are single purpose functions that generate specific output given only the Xpose database as input. The behavior can, to some extent, be influenced by the user.
+
+\link{xpose4classic-package} Xpose has  a text based menu interface to make it simple for the user to invoke the Xpose specific functions. This interface is called Xpose Classic. Given the limitations a text based interface imposes, Xpose Classic is not very flexible but may  be useful for quick assessment of a model and for learning to use Xpose.
+
+\link{xpose4psn-package} These functions are the interface between Xpose and PsN, i.e. they do not post-process NONMEM output but rather PsN output.
+
+
+ }
+
+\section{How to make NONMEM generate input to Xpose}{ Xpose recognizes
+NONMEM runs, and files associated to a particular run, though the run
+number.  This is a number that is used in the name of NONMEM model
+files, output files and table files.  The fundamental input to Xpose
+is one or more NONMEM table files.  These table files should be named
+as below followed by the run number, for example xptab1 for run number
+1.  Xpose looks for files according to the following pattern, where *
+is your run number:
+
+\bold{sdtab*}  Standard table file, containing ID, IDV, DV, PRED, IPRED, WRES, IWRES, RES, IRES, etc.
+
+\bold{patab*}	Parameter table, containing model parameters - THETAs, ETAs and EPSes
+
+\bold{catab*}	Categorical covariates, e.g. SEX, RACE
+
+\bold{cotab*}	Continuous covariates, e.g. WT, AGE
+
+\bold{extra*, mutab*, mytab*, xptab*, cwtab*}	Other variables you might need to have available to Xpose
+
+\bold{run*.mod}	Model specification file
+
+\bold{run*.lst}	NONMEM output
+
+Strictly, only one table file is needed for xpose (for example sdtab* or xptab*). 
+However, using patab*, cotab*, catab* will influence the way that Xpose interprets the data and are recommended to get  full benefit from Xpose.
+
+You can use code in NONMEM similar to the following to generate the tables you need. 
+NONMEM automatically appends DV, PRED, WRES and RES unless NOAPPEND is specified. 
+Don't forget to leave at least one blank line at the end of the NONMEM model specification file.
+
+\code{$TABLE ID TIME IPRED IWRES EVID MDV NOPRINT ONEHEADER FILE=sdtab1}
+\code{$TABLE ID CL V2 KA K SLP KENZ NOPRINT ONEHEADER FILE=patab1}
+\code{$TABLE ID WT HT AGE BMI PKG NOPRINT ONEHEADER FILE=cotab1}
+\code{$TABLE ID SEX SMOK ALC NOPRINT ONEHEADER FILE=catab1}
 }
-\section{Running Xpose with the classic menu system}{
+
+\section{Running Xpose}{
+
+  Xpose can be run in two different ways, using the classic menu system
+  and by using the command line in R.   
+  
+  \subsection{Running Xpose from the classic menu system}{ 
   Xpose can be run
   through a series of menu selections.  This method of running Xpose
   is useful for the beginning "Xposer" and for learning about the
@@ -47,34 +103,23 @@
   To run the classic Xpose interface, at the R command prompt,
   type:
 
-  \code{library(xpose4) #read in the xopse library}\cr
-  \code{xpose4() #Run the menu system}
+  \code{library(xpose4)}
+  \code{xpose4()}
 
   And follow the menu prompts.
 }
-
-\section{Running Xpose from the command line}{
-  Each function in the
-  Xpose bundle is now independently available from the command
-  line, once libraries are loaded. For example, you might do the
+\subsection{Running Xpose from the command line}{
+  Each function in 
+  Xpose  is  independently available from the command
+  line, once the library is loaded. For example, you might do the
   following: 
   
-  \code{library(xpose4) #read in the xopse library}\cr
-  \code{run.number <- 5 # run number of xpose table files}\cr
-  \code{xpdb <- xpose.data(run.number) # run number of xpose table
-    files}\cr
-  \code{basic.gof(xpdb) # Basic goodness-of-fit plots} 
+  \code{library(xpose4)}
+  \code{xpdb <- xpose.data(5)}
+  \code{basic.gof(xpdb)} 
 }
-
-  
-%   key functionality
-
-%   -mirror
-%   -vpc
-%   -cwres
-
-%   -nonmem naming convention
-
+}
+ 
 \section{Getting Help}{
   
   All Xpose 4.0 functions are documented within the R help system.
@@ -83,38 +128,31 @@
 
   \code{?dv.vs.pred}
 
-  You can also use the html help, in the R-gui go to (Help -> Html help)
+  You can also use the interactive help system in most R-interfaces: choose Help from the menu system, 
   then click on packages, then xpose4.
   
-  If you don't know the names of the Xpose function you would like to
-  use then you can browse the four different libraries that make up the
-  Xpose 4 distribution.  These libraries are:
-  
-  \code{\link[xpose4data:xpose4data-package]{xpose4data}} - 
-  Functions to to read NONMEM table files and create the Xpose data
-  structure.  
-  
-  \code{\link[xpose4generic:xpose4generic-package]{xpose4generic}} -  
-  Generic functions to create plots using the Xpose data structure.
-    
-  \code{\link[xpose4specific:xpose4specific-package]{xpose4specific}}
-  - 
-  Specific functions to create plots using the Xpose data
-  structure.  Generally what you want to use.
-    
-  \code{\link[xpose4classic:xpose4classic-package]{xpose4classic}}
-  - 
-  Functions for running the classic menu system in Xpose.
-
-    
-  \code{\link[xpose4specific:xpose4specific-package]{xpose4specific}}
-  may be the most helpful as it
-  contains functions that are ready to use just by telling the functions
+  The most interesting may be the specific functions \link{xpose4specific-package}.
+  These are functions that are ready to use just by telling the functions
   which xpose database to use (i.e. \code{xpdb} after running the
-  command \code{xpdb <- xpose.data(run.number)}).
-  
+  command \code{xpdb <- xpose.data(run.number)}).  
+}
+\section{The Xpose 4 Bestiary}{
+A more detailed description of Xpose with example plots and explanaitions for every specific function in the package
+is available in our Bestiarium: \url{http://xpose.sourceforge.net/bestiarium_v1.0.pdf}. 
+}
 
+\references{\href{http://xpose.sf.net}{Xpose Homepage}, \href{http://psn.sf.net}{PsN Homepage}}
+\examples{
+\dontrun{
+# run the classic interface
+library(xpose4)
+xpose4()
   
+# command line interface  
+library(xpose4)
+xpdb <- xpose.data(5)
+basic.gof(xpdb)
+}
 }
 \author{E. Niclas Jonsson, Mats Karlsson, Justin Wilkins and Andrew Hooker}
 \keyword{methods}

@@ -1,2 +1,4 @@
-import(methods, xpose4data, xpose4generic, xpose4specific, xpose4classic)
+import(lattice, grid, gam, methods)
+importFrom(Hmisc, print.char.matrix)
+importFrom(survival, Surv, survfit)
 exportPattern("^[^\\.]")
