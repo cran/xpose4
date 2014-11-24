@@ -1,5 +1,37 @@
 Xpose 4 News/Changelog
 
+Changes in version 4.5.3
+
+  o Update to ind.plots() to allow subsets on a per-y-variable basis.  
+    Useful to show IPRED and PRED in a finer grid than DV. See option
+    “y.vals.subset”.
+
+  o Update to how axes limits are computed with xpose.plot.default.
+
+  o Fix for using expression() in the ylb argument of xpose.VPC.
+
+  o Various small bug fixes.
+
+Changes in version 4.5.2
+
+  o Internal release  
+
+  o Updates to read.bootscm.par.est()
+
+Changes in version 4.5.1
+
+  o Internal release  
+
+  o Updated xpose.gam to work with the latest version of the gam package 
+
+  o Updated kaplan.plot to allow for ylim specification when "cov" 
+    argument is used.
+
+  o Updated compute.cwres and associted functions to work with NONMEM 7.
+
+  o Fixed warnings created in xpose.VPC.categorical when creating personalized 
+    x and y axis labels.
+
 Changes in version 4.5.0
 
   o External release with just one package instead of five.

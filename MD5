@@ -1,6 +1,6 @@
-e7a1f37dd29696bd03f12e2de0dba511 *DESCRIPTION
+8e3a2e76b341f300d8e0493a3b96784e *DESCRIPTION
 00365d6daa0516ffbd24c465d7f31138 *NAMESPACE
-cc6cba3b0ad4735780010742f5b0db19 *NEWS
+3badfc631bca888ded67231f40676e78 *NEWS
 bb69a9cef7707417d0b3ddee6c4eb0ef *R/Data.R
 5466e2ac8f7e078e0f3998288e2194f1 *R/PI.helper.R
 d3778fcb8fd051a05a43c01ffba59327 *R/SData.R
@@ -44,7 +44,7 @@ e228055ffb96b2eb0486ae1f56a3ee86 *R/basic.model.comp.R
 356fc054985f7649c78a831e1113ea14 *R/bootgam.R
 671a9c0ff0885117a6dee3e10988e6b1 *R/bootgam.menu.R
 a568cfb46779ca2353e3ba50c1dbd3db *R/bootgam.plots.R
-6d684e6ab11575c31ac8bba38d23ede8 *R/bootscm.R
+4da37510df705eb614214b354cb438b2 *R/bootscm.R
 098e0e57f57b4c9467c9190a0aea5ffb *R/calc.npar.R
 93a83841584daa8d1776deb34b603583 *R/cat.dv.vs.idv.sb.R
 5b34e1001d7d33a0a138bfef69a38619 *R/cat.pc.R
@@ -76,7 +76,7 @@ ba8ff1fbad39a241acf8f0b2c1a4846a *R/change.var.name.R
 55b5c5aaf18b216b2d05cb0c628cb923 *R/change.xvardef.R
 52be1d5f3a973884a0c4e1e44bfd6830 *R/check.gamobj.R
 068a3d2076256d06b4d68c6c5b2c68dc *R/check.vars.R
-7fee331c2002e91550992281786fe0ad *R/compute.cwres.R
+dd2f6fc9f497596960c844c394857c08 *R/compute.cwres.R
 133554d02241bfeb3272018a8343fb1e *R/computePI.R
 cf063ccaf3414c21729548fa95041c59 *R/continuous.table.R
 06f25e5b1a6e5ce07a4601c454a4ebed *R/cov.hist.R
@@ -85,7 +85,7 @@ ce866276c1a6081324d871f3a822e161 *R/cov.splom.R
 d77924d5272b92e3a6c9cd6f4d7e1ec1 *R/cov.summary.R
 b187fd85f1b9a1f5696424db5a035304 *R/covariate.model.menu.R
 5def3372190085f4d81a318216f2ca78 *R/create.mirror.R
-1ad4374e75a9f78ded5f3cee7f248625 *R/create.parameter.list.R
+bb7b57ad70b5c8e80d0137d50f1342bc *R/create.parameter.list.R
 f29f4a5949f1d3611aeb0cc6f4032bea *R/create.rand.R
 4f43b1bd2df511403f5b5c3781077aae *R/create.strat.rand.R
 a235db9d8b78c810514da1ec67a492fe *R/create.xpose.plot.classes.R
@@ -101,7 +101,7 @@ b1834b7f92f04a698303d8b4aef8a5f5 *R/cwres.vs.pred.bw.R
 4e4ed9b3bc3896894934293ba8454171 *R/cwres.wres.vs.idv.R
 05b8815f3d2d15d7c96767efa016ffbb *R/cwres.wres.vs.pred.R
 ff1f60119fe23d257cc440a69b649cdd *R/dOFV.vs.cov.R
-09eb3b0809d0e20e99619d9cd912c2d8 *R/dOFV.vs.id.R
+5df94ea8151f3c38e9456f1d70d7acec *R/dOFV.vs.id.R
 a54d869c6016e964c020835f5d9c1a12 *R/dOFV1.vs.dOFV2.R
 da22b14b6711d4f1dc4e61ca8c7cda42 *R/data.checkout.R
 b215c8ed68949774c2c82e39b206e980 *R/data.checkout.menu.R
@@ -117,7 +117,7 @@ a213f63ac48ee01964cbaf64d12aa6c7 *R/dv.vs.pred.by.cov.R
 777556896ba558507bff86f93fad1980 *R/dv.vs.pred.by.idv.R
 2b58a1619e7f7324de0bdf7a3b7f767b *R/dv.vs.pred.ipred.R
 89d4077acf126ae8b6d98db095ca7b32 *R/eq.xpose.R
-bc0d04339542a01d4d69d97c4059ff03 *R/export.graph.par.R
+55147e60d7b8850234a13b1b775b6931 *R/export.graph.par.R
 f985787fc4495d70b7ad4ace743a2a36 *R/export.variable.definitions.R
 1a80309c3e3eceb8f27f63a87a593ed8 *R/fix.wrapped.lines.R
 788d0f72424eb70e24a2229e14f8ba98 *R/gam.change.weights.R
@@ -130,7 +130,7 @@ b08812d79b19b4f9e4862caee5872c3a *R/get.refrunno.R
 d2db53d6e6d99defa86680326b593b7b *R/gofSetup.R
 f0a41918d4fe95d47c7593f4342f827b *R/import.graph.par.R
 0c4bd971ec957fac0eeb2c6f6a399c87 *R/import.variable.definitions.R
-e4097f13cc302aa07a02034e3bdbe6f8 *R/ind.plots.R
+614739d5d8bb3d168e598ea6d66da709 *R/ind.plots.R
 9bce3430095343252aac760e40888dc8 *R/ind.plots.cwres.hist.R
 81f540fe66752dc565f4d29c7e71d0f3 *R/ind.plots.cwres.qq.R
 c53413fdc508797367cc12d09feeec9d *R/ind.plots.wres.hist.R
@@ -140,7 +140,7 @@ ad4b2264673752569da8874066f1d876 *R/ipred.vs.idv.R
 69c9de1ef2ee81fdd6202bea4f1fe8c0 *R/iwres.dist.hist.R
 6090f1053c257f87b0f00d4b647ab29e *R/iwres.dist.qq.R
 b6014ab46dcd1f0535bd25377453f895 *R/iwres.vs.idv.R
-0eead86935c3b42958225650b046be31 *R/kaplan.plot.R
+dd967a5482a171bd1887efd0e6058ad9 *R/kaplan.plot.R
 450c2bf560c9bc593f704bbc4e9112e6 *R/list.gam.settings.R
 efa96720ba18bc7a92e536a1ca102787 *R/main.menu.R
 521090745d45122117ce85530e23253f *R/make.sb.data.R
@@ -153,7 +153,7 @@ e7abd81bd96e4c76513401aae8bc9ed9 *R/model.comparison.covariates.menu.R
 2efa0010364b029d8267816137d685f2 *R/parm.hist.R
 f053520c20ab009b6b5cdbbae8d805e3 *R/parm.qq.R
 bd2683a2d123a39750c57df98f95df3a *R/parm.splom.R
-59dbb40b2e71c5e9f8c0b9ab6fc0035a *R/parm.summary.R
+6245698efe76bc33fa37037ac9659b01 *R/parm.summary.R
 ec957c29a1deedee207049875eec7017 *R/parm.vs.cov.R
 671a951efb7fc57970e870efbe34c09b *R/parm.vs.parm.R
 4ff14338a3246f2670ddcad348c61d75 *R/pred.vs.idv.R
@@ -167,7 +167,7 @@ d6972ef20b3db42c9024b1e31537784c *R/preferences.menu.R
 8687a366c3f419e551130240ee34590f *R/read.TTE.sim.data.R
 ca3107173a190ef56105e8f973fd90ed *R/read.lst.R
 541de4d4091555727341b8496a440ae5 *R/read.lst6.R
-8512e71565e1a2a33ffb08996b3f72ce *R/read.lst7.R
+c5640477c1b7297076c71fb95649fb45 *R/read.lst7.R
 147fbb23c2f846a91ea639f1e0f14cc8 *R/read.nm.tables.R
 896d547aaae56a12c22e53b3de7dce2a *R/read.npc.vpc.results.R
 b80682b6ca3ee0808de642782100ea70 *R/read.phi.R
@@ -203,16 +203,16 @@ af7bb4cce7d5d88ac031ca39730acd9c *R/xp.plot.R
 0aca3d3ce702292f1f60fd7ae9e819d9 *R/xp.scope3.R
 42e1498f226e3421f416df3b19bfd90c *R/xp.summary.R
 5ce403ff3e2c78d89b7988e454b0a495 *R/xpPage.R
-477ed3c5fdb2d2f107a43b6564bcb500 *R/xpose.VPC.R
+4bec151e0b8b534629ddb75db5e68fa1 *R/xpose.VPC.R
 e639b35a8e6a5d44cd8f2a880eb6dd52 *R/xpose.VPC.both.R
-b524fe112e518a5b589cd9dc7f6ad2b3 *R/xpose.VPC.categorical.R
+f164ec4ff5eaa95f829b8d08ea594536 *R/xpose.VPC.categorical.R
 9f5cd44594d308c64d7e573b1c47e92f *R/xpose.ask.for.filename.R
 13321d42c4f56e7b2caea89084398bc6 *R/xpose.bin.R
 15c8bf6f6f6e5c80a48f362b618a9355 *R/xpose.calculate.cwres.R
 c9a8a76aedf2c26d1d28aa6727049c9a *R/xpose.create.title.R
 d47774a1c805ebbfaa1ef50de929374d *R/xpose.data.R
 8428b276645a69f2c6fe88efc0bc92dc *R/xpose.dev.new.R
-8432de23218ae3df4f721ab2731c8797 *R/xpose.gam.R
+478b88523c464361ae55681dca06e0ea *R/xpose.gam.R
 89704f8929504928c7753aad4a212c02 *R/xpose.license.citation.R
 fd89b061e1c23a7d0f15d79230c0c738 *R/xpose.log.axes.R
 61010d5887096e04f04f43dcb72023b9 *R/xpose.multiple.plot.R
@@ -223,15 +223,15 @@ d941e5cc2af5cbff9d573cc612751334 *R/xpose.panel.default.R
 adac2b4715c335d3491f45efda9d27e3 *R/xpose.panel.qq.R
 6d7978702245c6f57276ca3fc79efefa *R/xpose.panel.splom.R
 07e7f354883fb7f25c45b1b841cf278a *R/xpose.plot.bw.R
-f1dc978a9fa35ae717015470a46a32b4 *R/xpose.plot.default.R
+033bc95ec557c3d8ead6716f759563cc *R/xpose.plot.default.R
 a5b355f7cdd7d2bd494621df42327bda *R/xpose.plot.histogram.R
 ff8592b0693e2e3a5224658a10e2165a *R/xpose.plot.qq.R
 943515e19313827a68c02499a37d0c89 *R/xpose.plot.splom.R
 1604add0719c1662cba51b41c12a8cfb *R/xpose.print.R
 7ba2091099655f8bc953f748b78279e6 *R/xpose.read.R
-4539d04ea49a5d171dc8983a18adb480 *R/xpose.stack.R
+a619d605d389dc1fbe56d6bbb7c165f2 *R/xpose.stack.R
 a9c1026947c4f5ecd8db2ef2460bde7b *R/xpose.string.print.R
-b4b202a694d25883900fcfcaed04b5ed *R/xpose.write.R
+63797f4a24b7eff47a95fd5fe44414a6 *R/xpose.write.R
 5663e267e64256e0739fbf599d17ee0c *R/xpose4.R
 9cf5f20a8c100e1d1570c64d42115196 *R/xsubset.R
 2adc6314d845fa17486e832ea01eb7c1 *R/xvardef.R
@@ -272,7 +272,7 @@ d4efe86dfab4aacf1537c93026e5defa *man/change.graphical.parameters.Rd
 394bb827623b8e5d3617355dbf1989b0 *man/change.var.name.Rd
 a7b7f45174b26ea0e55ee2805efb7a84 *man/change.xlabel.Rd
 cc7c703aea71a7c4ecc8cc3dcb8c8dff *man/change.xvardef.Rd
-f11a5ad71758a506b6e73fb50730c73a *man/compute.cwres.Rd
+75449b3f8c2730fcae83dff41b9fc987 *man/compute.cwres.Rd
 5064b3af3478d7331f910a9a5d898195 *man/create.mirror.Rd
 9e21a279fa8e88bda9d0457f2320ecc0 *man/create.xpose.plot.classes.Rd
 f89bfe8e984f36df0a3b80ad684bcd19 *man/createXposeClasses.Rd
@@ -308,7 +308,7 @@ b38154d9ec05a4280dc365fa4d2b6263 *man/functions-generic.Rd
 0c6ed49e6e86632621532c4eca0d1763 *man/gof.Rd
 2992338ef2fa95263047ab8589ba392c *man/import.graph.par.Rd
 a631045c6bd5fa76a9d54e1b211d5aa4 *man/import.variable.definitions.Rd
-cb08c3d2f61cd31b40492ed917409799 *man/ind.plots.Rd
+86300142b3e6eb78d3c961063fd80abc *man/ind.plots.Rd
 896be7e9bf5d31b9070157b1b1464574 *man/ind.plots.wres.hist.Rd
 62a89ace8dab77461895c4c391127f81 *man/ind.plots.wres.qq.Rd
 dec06637918ab193498ed4ad671e2dc5 *man/internal.functions.Rd
@@ -338,7 +338,7 @@ a353d125db985948f8403f531dbd235c *man/reset.Rd
 5fc10849ec67e70d4385c4639e2573f6 *man/splom.Rd
 83fff7a54984ff533bb76448cf6fdb6d *man/summary.Rd
 ce92c13eed42b865bac59b745949914a *man/tables.Rd
-fefd9374f9054f1670bd9a40b2302f64 *man/tabulate.parameters.Rd
+872891082008a723e9de085bf84e42ac *man/tabulate.parameters.Rd
 9ae6bf39b9b9305b2c9049dadf136be0 *man/wres.dist.hist.Rd
 eba2981cf0fbe0d50aa4d833c1c4fc3b *man/wres.dist.qq.Rd
 f764d4a5c7ca1b38d3e7a695fa57e98e *man/wres.vs.cov.Rd
@@ -360,7 +360,7 @@ ffaf4b5e5b238c4b0f876ce0cdeecbba *man/xp.inc.prob.comb.2.Rd
 c59258b1731939602bb9a28af424ff0e *man/xp.incl.index.cov.ind.Rd
 9cf4eca608a99283160a000f1d2bb49c *man/xpose.VPC.Rd
 eed1ef4175235648084c4fe3b877177b *man/xpose.VPC.both.Rd
-547ddc47203502261c8f65c4f03c5870 *man/xpose.VPC.categorical.Rd
+9c762aa8208ae36221d19e80c5c61708 *man/xpose.VPC.categorical.Rd
 fb5535770b7ef9c36b319dca1df9bfbd *man/xpose.ask.for.filename.Rd
 6d43c1d6fa5d5f55a5cb156f2a66cf82 *man/xpose.create.title.Rd
 73cbe8330bbce3aa8a7c4748ee30428d *man/xpose.create.title.text.Rd
@@ -390,7 +390,7 @@ b768d88dd79d870f8a35e80b08cec017 *man/xpose.yscale.components.log10.Rd
 e6c496588ca1df6eca74feab005e6475 *man/xpose4data-internal.Rd
 9590fdb9e1950265f09e79a01e0a39db *man/xpose4data-package.Rd
 4788bc03a541edac8c5504023655fccc *man/xpose4generic-package.Rd
-12955b4094183a9fe3d671c03e58e7da *man/xpose4psn-package.Rd
+9c5e7a1f4ac3480c409d8700821a7f5a *man/xpose4psn-package.Rd
 41f0288f1227baf6ed0797431e19b884 *man/xpose4specific-internal.Rd
 d1cf35ed19eead359b8071c3d52ba27b *man/xpose4specific-package.Rd
 e187fa38421326833f027aa459be1a81 *man/xsubset.Rd
