@@ -22,7 +22,31 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"xpose.multiple.plot" <-
+
+
+#' Create and object with class "xpose.multiple.plot".
+#' 
+#' Create and object with class "xpose.multiple.plot".
+#' 
+#' 
+#' @param plotList A list of lattice plots.
+#' @param plotTitle Main title for plots.
+#' @param nm7 \code{TRUE} if we are using NONMEM 7
+#' @param prompt When printing should we prompt for each new page in plot?
+#' @param new.first.window \code{TRUE} or \code{FALSE}.
+#' @param max.plots.per.page A number.  Max value is 9.
+#' @param title Title properties.
+#' @param mirror Are there mirror plots in plot list?
+#' @param bql.layout Should we use layout optimized for plots with BQL (below
+#' limit of quantification) measurements?
+#' @param \dots Additional options passed to function.
+#' @return An object of class "xpose.multiple.plot".
+#' @author Niclas Jonsson and Andrew C. Hooker
+#' @seealso \code{\link{print.xpose.multiple.plot}},
+#' \code{\link{xpose.multiple.plot.default}}
+#' @export 
+#' @family generic functions 
+xpose.multiple.plot <-
   function(plotList,
            plotTitle=NULL,
            nm7 = TRUE,
@@ -40,8 +64,11 @@
            ...) {
 
     ## Initialize the classes
-    createXposeClasses(nm7=nm7)
-
+    #createXposeClasses(nm7=nm7)
+    #if (!isClass("xpose.data") || !isClass("xpose.prefs")) {
+    #  createXposeClasses()
+    #}
+    
     obj <- new("xpose.multiple.plot",
                plotList  = plotList,
                plotTitle = plotTitle,

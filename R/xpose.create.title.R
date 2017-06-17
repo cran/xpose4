@@ -22,6 +22,33 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
+
+
+#' Functions to create labels for plots
+#' 
+#' Functions to create labels for plots
+#' 
+#' 
+#' @param x Column name for x-variable
+#' @param y Column name for y variable
+#' @param object Xpose data object
+#' @param subset Subset used for plot
+#' @param fun Function applied to data
+#' @param funx Function applied to x data
+#' @param funy Function applied to y data
+#' @param no.runno should we include a run number in the label
+#' @param logx is the data log transformed?
+#' @param autocorr.x Are we looking at an autocorrelation plot?
+#' @param autocorr.y Are we looking at an autocorrelation plot?
+#' @param plot.text Text of plot title
+#' @param main If \code{"Default"} then \code{plot.text} is the default title
+#' with the run number and subset expression added to the title. If the value
+#' is anything other than \code{"Default"} then that value is used as the plot
+#' title.
+#' @param \dots additional arguments passed to the function.
+#' @return Plot titles and labels.
+#' @author Andrew Hooker
+#' @keywords  internal
 xpose.create.title <- function(x,y,object,subset=NULL,funx=NULL,funy=NULL,
                                no.runno=FALSE,...){
 
@@ -88,6 +115,22 @@ xpose.create.title <- function(x,y,object,subset=NULL,funx=NULL,funy=NULL,
   return(main)
 }
  
+
+
+#' Create Xpose title text for plots.
+#' 
+#' Create Xpose title text for plots.
+#' 
+#' 
+#' @param x The x-axis variable name.
+#' @param y The y-axis variable name.
+#' @param text Initial text in title.
+#' @param object Xpose data object \code{\link{xpose.data}}.
+#' @param subset Subset definition.
+#' @param text2 Text at the end of the title.
+#' @param \dots Additional options passed to function.
+#' @author Andrew C. Hooker
+#' @keywords internal
 xpose.create.title.text <- function(x,y,text,object,subset,text2=NULL,...){
   main <- xpose.create.title(x,y,object,subset=subset,...)
   main <- paste(text,main,text2)
@@ -103,6 +146,7 @@ xpose.create.title.hist <- function(x,object,subset,...){
   return(main)
 }
 
+#' @describeIn xpose.create.title Create label values
 xpose.create.label <- function(x,object,fun,logx,
                                autocorr.x=FALSE,
                                autocorr.y=FALSE,...){

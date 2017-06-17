@@ -22,7 +22,45 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"dv.vs.pred" <-
+
+
+#' Observations (DV) plotted against population predictions (PRED) for Xpose 4
+#' 
+#' This is a plot of observations (DV) vs population predictions (PRED), a
+#' specific function in Xpose 4. It is a wrapper encapsulating arguments to the
+#' \code{xpose.plot.default} function. Most of the options take their default
+#' values from xpose.data object but may be overridden by supplying them as
+#' arguments.
+#' 
+#' A wide array of extra options controlling \code{xyplot}s are available. See
+#' \code{\link{xpose.plot.default}} and \code{\link{xpose.panel.default}} for
+#' details.
+#' 
+#' @param object An xpose.data object.
+#' @param abline Vector of arguments to the \code{\link[lattice]{panel.abline}}
+#' function. No abline is drawn if \code{NULL}.
+#' @param smooth Logical value indicating whether an x-y smooth should be
+#' superimposed.  The default is TRUE.
+#' @param \dots Other arguments passed to \code{link{xpose.plot.default}}.
+#' @return Returns an xyplot of DV vs PRED.
+#' @author E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins
+#' @seealso \code{\link{xpose.plot.default}},
+#' \code{\link{xpose.panel.default}}, \code{\link[lattice]{xyplot}},
+#' \code{\link{xpose.prefs-class}}, \code{\link{xpose.data-class}}
+#' @keywords methods
+#' @examples
+#' ## Here we load the example xpose database 
+#' xpdb <- simpraz.xpdb
+#' 
+#' ## A vanilla plot
+#' dv.vs.pred(xpdb)
+#' 
+#' ## A conditioning plot
+#' dv.vs.pred(xpdb, by="HCTZ")
+#' 
+#' @export dv.vs.pred
+#' @family specific functions 
+dv.vs.pred <-
   function(object,
            abline=c(0,1),
            smooth=TRUE,

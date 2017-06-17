@@ -1,27 +1,49 @@
-# Xpose 4
-# An R-based population pharmacokinetic/
-# pharmacodynamic model building aid for NONMEM.
-# Copyright (C) 1998-2004 E. Niclas Jonsson and Mats Karlsson.
-# Copyright (C) 2005-2008 Andrew C. Hooker, Justin J. Wilkins, 
-# Mats O. Karlsson and E. Niclas Jonsson.
-# Copyright (C) 2009-2010 Andrew C. Hooker, Mats O. Karlsson and 
-# E. Niclas Jonsson.
-
-# This file is a part of Xpose 4.
-# Xpose 4 is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public License
-# as published by the Free Software Foundation, either version 3
-# of the License, or (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program.  A copy can be cound in the R installation
-# directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
-
+#' Print run summary in Xpose 4
+#' 
+#' Function to build Xpose run summaries.
+#' 
+#' 
+#' @param object An xpose.data object.
+#' @param dir The directory to look for the model and output file of a NONMEM
+#' run.
+#' @param modfile The name of the NONMEM control stream associated with the
+#' current run.
+#' @param listfile The name of the NONMEM output file associated with the
+#' current run.
+#' @param main A string giving the main heading. \code{NULL} if none.
+#' @param subset A string giving the subset expression to be applied to the
+#' data before plotting. See \code{\link{xsubset}}.
+#' @param show.plots Logical indicating if GOF plots should be shown in the run
+#' summary.
+#' @param txt.cex Number indicating the size of the txt in the run summary.
+#' @param txt.font Font of the text in the run summary.
+#' @param show.ids Logical indicating if IDs should be plotted in the plots for
+#' the run summary.
+#' @param param.table Logical indicating if the parameter table should be shown
+#' in the run summary.
+#' @param txt.columns The number of text columns in the run summary.
+#' @param force.wres Plot the WRES even if other residuals are available.
+#' @param \dots Other arguments passed to the various functions.
+#' @return A compound plot containing an Xpose run summary is created.
+#' @author Niclas Jonsson and Andrew Hooker
+#' @keywords methods
+#' @examples
+#' od = setwd(tempdir()) # move to a temp directory
+#' (cur.files <- dir()) # current files in temp directory
+#' 
+#' simprazExample(overwrite=TRUE) # write files
+#' (new.files <- dir()[!(dir() %in% cur.files)])  # what files are new here?
+#' 
+#' xpdb <- xpose.data(1)
+#' runsum(xpdb)
+#' 
+#' 
+#' file.remove(new.files) # remove these files
+#' setwd(od)  # restore working directory
+#' 
+#' 
+#' @export runsum
+#' @family specific functions 
 runsum <-
   function(object,
            dir="",

@@ -22,7 +22,39 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"tabulate.parameters"  <- function(object,prompt=FALSE,outfile=NULL,dir="")
+
+
+#' Tabulate the population parameter estimates
+#' 
+#' This function provides a summary of the model's parameter estimates and
+#' precision.
+#' 
+#' 
+#' @param object An xpose.data object.
+#' @param prompt Ask before printing.
+#' @param outfile file to output to (NULL means screen).
+#' @param dir Which directory is the NONMEM output file located. \code{""} means
+#' the current working directory \code{getwd()}.
+#' @return A table summarizing the parameters and their precision.
+#' @author Niclas Jonsson, Andrew Hooker & Justin Wilkins
+#' @keywords methods
+#' @examples
+#' 
+#' od = setwd(tempdir()) # move to a temp directory
+#' (cur.files <- dir()) # current files in temp directory
+#' 
+#' simprazExample(overwrite=TRUE) # write files
+#' (new.files <- dir()[!(dir() %in% cur.files)])  # what files are new here?
+#' xpdb <- xpose.data(1) # read in files to xpose database
+#' 
+#' tabulate.parameters(xpdb)
+#' 
+#' file.remove(new.files) # remove these files
+#' setwd(od)  # restore working directory
+#' 
+#' @export tabulate.parameters
+#' @family data functions 
+tabulate.parameters  <- function(object,prompt=FALSE,outfile=NULL,dir="")
 {
   if(prompt==TRUE){
     listfile=paste("run",object@Runno,".lst",sep="")
@@ -92,7 +124,7 @@
   }
   
   if(ans != "y") {
-    print.char.matrix(ret.mat,col.names=TRUE)
+    Hmisc::print.char.matrix(ret.mat,col.names=TRUE)
   }
   else {
     if(prompt==TRUE || is.null(outfile)){

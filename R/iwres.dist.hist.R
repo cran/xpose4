@@ -22,7 +22,30 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"iwres.dist.hist" <-
+
+
+#' Histogram of individual weighted residuals (IWRES), for Xpose 4
+#' 
+#' This is a histogram of the distribution of individual weighted residuals
+#' (IWRES) in the dataset, a specific function in Xpose 4. It is a wrapper
+#' encapsulating arguments to the \code{xpose.plot.histogram} function.
+#' 
+#' Displays a histogram of the individual weighted residuals (IWRES).
+#' 
+#' @param object An xpose.data object.
+#' @param \dots Other arguments passed to \code{\link{xpose.plot.histogram}}.
+#' @return Returns a histogram of individual weighted residuals (IWRES).
+#' @author E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins
+#' @seealso \code{\link{xpose.plot.histogram}},
+#' \code{\link{xpose.panel.histogram}}, \code{\link[lattice]{histogram}},
+#' \code{\link{xpose.prefs-class}}, \code{\link{xpose.data-class}}
+#' @keywords methods
+#' @examples
+#' iwres.dist.hist(simpraz.xpdb)
+#' 
+#' @export iwres.dist.hist
+#' @family specific functions 
+iwres.dist.hist <-
   function(object,
            ...) {
 

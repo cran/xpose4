@@ -1,41 +1,17 @@
-# Xpose 4
-# An R-based population pharmacokinetic/
-# pharmacodynamic model building aid for NONMEM.
-# Copyright (C) 1998-2004 E. Niclas Jonsson and Mats Karlsson.
-# Copyright (C) 2005-2008 Andrew C. Hooker, Justin J. Wilkins, 
-# Mats O. Karlsson and E. Niclas Jonsson.
-# Copyright (C) 2009-2010 Andrew C. Hooker, Mats O. Karlsson and 
-# E. Niclas Jonsson.
-
-# This file is a part of Xpose 4.
-# Xpose 4 is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public License
-# as published by the Free Software Foundation, either version 3
-# of the License, or (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program.  A copy can be cound in the R installation
-# directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
-
-"xpose.read" <-
+xpose.read <-
   function(object,
            file = "xpose.ini"
            ) {
            
   # x <- object
-  options(warn = -1)
+  #options(warn = -1)
   # read ini file
-  prefs <- read.table(file, col.names=c("Option","Value"))
-  prefs.m <- as.matrix(prefs)
+    prefs <- read.table(file, col.names=c("Option","Value"))
+    prefs.m <- as.matrix(prefs)
   
   # iterate and assign
   for (i in 1:nrow(prefs.m)) {
-  
+
     # General
     
     if (prefs.m[i,1] == "Miss") {
@@ -62,7 +38,7 @@
       object@Prefs@Graph.prefs$lwd = as.numeric(prefs.m[i,2])
     }
     if (prefs.m[i,1] == "col") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$col = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$col = as.character(prefs.m[i,2])
@@ -75,7 +51,11 @@
       object@Prefs@Graph.prefs$grid = as.logical(prefs.m[i,2])
     }   
     if (prefs.m[i,1] == "aspect") {
-      object@Prefs@Graph.prefs$aspect = as.numeric(prefs.m[i,2])
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
+        object@Prefs@Graph.prefs$aspect = as.numeric(prefs.m[i,2])
+      } else {
+        object@Prefs@Graph.prefs$aspect = as.character(prefs.m[i,2])
+      }
     } 
     
     # Conditioning
@@ -107,7 +87,7 @@
 #      }
 #    }
     if (prefs.m[i,1] == "ablcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$ablcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$ablcol = as.character(prefs.m[i,2])
@@ -130,7 +110,7 @@
 #      }
 #    }
     if (prefs.m[i,1] == "lmcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$lmcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$lmcol = as.character(prefs.m[i,2])
@@ -153,7 +133,7 @@
       }
     }
     if (prefs.m[i,1] == "smcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$smcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$smcol = as.character(prefs.m[i,2])
@@ -182,7 +162,7 @@
 #      }
 #    }
     if (prefs.m[i,1] == "sucol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$sucol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$sucol = as.character(prefs.m[i,2])
@@ -260,21 +240,21 @@
       object@Prefs@Graph.prefs$PImetyp = as.character(prefs.m[i,2])
     }  
     if (prefs.m[i,1] == "PIupcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$PIupcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$PIupcol = as.character(prefs.m[i,2])
       }
     }
     if (prefs.m[i,1] == "PIdocol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$PIdocol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$PIdocol = as.character(prefs.m[i,2])
       }
     }
     if (prefs.m[i,1] == "PImecol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$PImecol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$PImecol = as.character(prefs.m[i,2])
@@ -298,7 +278,7 @@
       PIdolimit = as.numeric(prefs.m[i,2])
     }    
     if (prefs.m[i,1] == "PIarcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$PIarcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$PIarcol = as.character(prefs.m[i,2])
@@ -320,7 +300,7 @@
       object@Prefs@Graph.prefs$bwdotpch = as.numeric(prefs.m[i,2])
     }  
     if (prefs.m[i,1] == "bwdotcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$bwdotcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$bwdotcol = as.character(prefs.m[i,2])
@@ -330,14 +310,14 @@
       object@Prefs@Graph.prefs$bwdotcex = as.numeric(prefs.m[i,2])
     }
     if (prefs.m[i,1] == "bwrecfill") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$bwrecfill = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$bwrecfill = as.character(prefs.m[i,2])
       }
     }
     if (prefs.m[i,1] == "bwreccol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$bwreccol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$bwreccol = as.character(prefs.m[i,2])
@@ -350,7 +330,7 @@
       object@Prefs@Graph.prefs$bwreclwd = as.numeric(prefs.m[i,2])
     }  
     if (prefs.m[i,1] == "bwumbcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$bwumbcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$bwumbcol = as.character(prefs.m[i,2])
@@ -366,7 +346,7 @@
       object@Prefs@Graph.prefs$bwoutpch = as.numeric(prefs.m[i,2])
     }   
     if (prefs.m[i,1] == "bwoutcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$bwoutcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$bwoutcol = as.character(prefs.m[i,2])
@@ -379,21 +359,21 @@
     # Histograms
     
     if (prefs.m[i,1] == "hiborder") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$hiborder = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$hiborder = as.character(prefs.m[i,2])
       }
     }
     if (prefs.m[i,1] == "hicol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$hicol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$hicol = as.character(prefs.m[i,2])
       }
     } 
     if (prefs.m[i,1] == "hidcol") {
-      if ((prefs.m[i,2]!="") && (!is.na(as.numeric(prefs.m[i,2])))) {
+      if ((prefs.m[i,2]!="") && (!is.na(suppressWarnings(as.numeric(prefs.m[i,2]))))) {
         object@Prefs@Graph.prefs$hidcol = as.numeric(prefs.m[i,2])
       } else {
         object@Prefs@Graph.prefs$hidcol = as.character(prefs.m[i,2])
@@ -416,7 +396,7 @@
   
   object@Prefs@Graph.prefs$PIlimits = c(PIdolimit, PIuplimit)  
   
-  options(warn = 1)
+  #options(warn = 1)
   return(object)
   
 }

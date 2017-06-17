@@ -1,26 +1,60 @@
-# Xpose 4
-# An R-based population pharmacokinetic/
-# pharmacodynamic model building aid for NONMEM.
-# Copyright (C) 1998-2004 E. Niclas Jonsson and Mats Karlsson.
-# Copyright (C) 2005-2008 Andrew C. Hooker, Justin J. Wilkins, 
-# Mats O. Karlsson and E. Niclas Jonsson.
-# Copyright (C) 2009-2010 Andrew C. Hooker, Mats O. Karlsson and 
-# E. Niclas Jonsson.
 
-# This file is a part of Xpose 4.
-# Xpose 4 is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public License
-# as published by the Free Software Foundation, either version 3
-# of the License, or (at your option) any later version.
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
 
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program.  A copy can be cound in the R installation
-# directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
+#' Compare parameter estimates for covariate coefficients
+#' 
+#' This function creates a plot of the estimates for covariate coefficients,
+#' obtained from the first step (univariate testing) in each scm performed in
+#' the bootscm. When normalized for their standard deviation, these plots can
+#' be used to compare the strength of the covariate relationship. Coloring is
+#' based on the covariate being included in the final model (blue) not being
+#' included (red).
+#' 
+#' Optionally, estimated bias is plotted in the graph (as text). Bias is also
+#' shown by the difference in mean of parameter estimates when the covariate is
+#' included (blue diamond), as opposed to the mean of all parameter estimates
+#' (grey diamond)
+#' 
+#' Note: For dichotomous covariates, the default PsN implementation is to use
+#' the most common covariate value as base, while the effect of the other
+#' value, is estimated by a theta. Xpose (bootscm.import) however recalculates
+#' the estimated parameters, to the parametrization in which the lowest value
+#' of the dichotomous covariate is the base (e.g. 0), and the estimated THETA
+#' denotes the proportional change, when the covariate has the other value
+#' (e.g. 1).
+#' 
+#' 
+#' @param bootgam.obj The object created using bootscm.import(), which hold the
+#' data for plotting.
+#' @param sd.norm Perform normalization of the covariate coefficients (default
+#' is TRUE). When TRUE, the estimated covariate coefficients will be multiplied
+#' by the standard deviation of the specific covariate (both for continuous and
+#' categorical covariates).
+#' @param by.cov.type Split the plot for continuous and dichotomous covariates.
+#' Default is FALSE.
+#' @param abs.values Show the covariate coefficient in absolute values. Default
+#' is FALSE.
+#' @param show.data Show the actual covariate coefficients in the plot. Default
+#' is TRUE.
+#' @param show.means Show the means of included covariates (blue) and all
+#' covariates (grey) in the plot. Default is TRUE.
+#' @param show.bias Show estimated bias as text in the plot. Default is TRUE.
+#' @param dotpch The character used for plotting.
+#' @param labels Custom labels for the parameter-covariate relationships,
+#' (character vector)
+#' @param xlab Custom x-axis label
+#' @param ylab Custom y-axis label
+#' @param pch.mean The character used for plotting the mean.
+#' @param col The color scheme.
+#' @param \dots Additional plotting arguments may be passed to this function.
+#' @return No value returned.
+#' @author Ron Keizer
+#' @keywords ~bootscm
+#' @examples
+#' 
+#'   xp.boot.par.est()
+#' 
+#' @export xp.boot.par.est
 xp.boot.par.est <- function (bootgam.obj = NULL,
                              sd.norm = TRUE,
                              by.cov.type = FALSE,
@@ -72,6 +106,9 @@ xp.boot.par.est <- function (bootgam.obj = NULL,
     }
     incl.freq <- apply (cleaned.data, 2, sum)
     lev.ord <- names(incl.freq)[order(incl.freq)]
+
+
+    lev.ord <- unlist(sapply(lev.ord,function(x) levels(pl.dat$cov)[grep(x,levels(pl.dat$cov))]),use.names = F)
 
     abs.fun <- function (dat) {return(dat)}
     if (abs.values == TRUE) {
@@ -170,6 +207,42 @@ ask.covs.plot <- function (bootgam.obj = NULL) {
     }
 }
 
+
+
+#' Correlations between covariate coefficients
+#' 
+#' This function creates a plot showing the correlations in estimates for
+#' covariate coefficients, obtained from the first step (univariate testing) in
+#' each scm performed in the bootscm.
+#' 
+#' 
+#' @param bootgam.obj The object created using bootscm.import(), which hold the
+#' data for plotting.
+#' @param sd.norm Perform normalization of the covariate coefficients (default
+#' is TRUE). When TRUE, the estimated covariate coefficients will be multiplied
+#' by the standard deviation of the specific covariate (both for continuous and
+#' categorical covariates).
+#' @param by.cov.type Split the plot for continuous and dichotomous covariates.
+#' Default is FALSE.
+#' @param cov.plot A character vector which lists the covariates to include in
+#' the plot. If none are specified (NULL), all covariate coefficients will be
+#' included in the plot.
+#' @param ask.covs Ask the user which covariates to include in the plot.
+#' Default is FALSE.
+#' @param dotpch The character used for plotting.
+#' @param col The colors used for plotting.
+#' @param \dots Additional plotting arguments may be passed to this function.
+#' @return No value returned.
+#' @author Ron Keizer
+#' @keywords ~bootscm
+#' @examples
+#' 
+#' \dontrun{
+#' xp.boot.par.est.corr(current.bootscm, sd.norm = TRUE,
+#'                           cov.plot = c("CLSEX", "VSEX", "CLWT"))
+#' 
+#' }
+#' @export xp.boot.par.est.corr
 xp.boot.par.est.corr <- function (bootgam.obj = NULL,
                                   sd.norm = TRUE,
                                   by.cov.type = FALSE,
@@ -215,6 +288,26 @@ xp.boot.par.est.corr <- function (bootgam.obj = NULL,
     return(p)
 }
 
+
+
+#' Print summary information for a bootgam or bootscm
+#' 
+#' This functions prints some summary information for a bootgam performed in
+#' Xpose, or for a bootscm performed in PsN.
+#' 
+#' 
+#' @param bootgam.obj The bootgam or bootscm object.
+#' @return No value returned
+#' @author Ron Keizer
+#' @keywords ~bootgam ~bootscm
+#' @examples
+#' 
+#' \dontrun{
+#' bootgam.print(current.bootgam)  # Print summary for the current Xpose bootgam object
+#' bootgam.print(current.bootscm)  # Print summary for the current Xpose bootscm object
+#' }
+#' 
+#' @export bootgam.print
 bootgam.print <- function(bootgam.obj = NULL) {
     bootgam.obj <- get.boot.obj(bootgam.obj, NULL)
     if (is.null(bootgam.obj)) {
@@ -297,7 +390,7 @@ check.bootgamobj <- function () {
         }
         return(gobjname)
     }
-    
+
     if (exists("current.bootgam", where = 1)) {
       cur.boot <- eval(as.name("current.bootgam"))
       cat("\nThe current bootgam object is for", cur.boot$parnam,
@@ -403,6 +496,26 @@ get.boot.obj <- function (bootgam.obj = NULL,
     return(bootgam.obj)
 }
 
+
+
+#' Plot of model size distribution for a bootgam or bootscm
+#' 
+#' This function creates a kernel smoothed plot of the number of covariates
+#' included in the final model in each gam/scm in the bootgam/bootscm
+#' procedure.
+#' 
+#' 
+#' @param bootgam.obj The bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means
+#' the user will be asked to make a choice.
+#' @param main Plot title.
+#' @param bw The smoothing bandwidth to be used for the kernel.
+#' @param xlb The x-axis label.
+#' @param \dots Additional plotting parameter may be passed to this function.
+#' @return A lattice plot object will be returned.
+#' @author Ron Keizer
+#' @keywords ~bootgam ~bootscm
+#' @export xp.distr.mod.size
 xp.distr.mod.size <- function (bootgam.obj = NULL,
                                boot.type = NULL,
                                main = NULL,
@@ -461,86 +574,111 @@ ask.incl.range <- function (bootgam.obj = NULL) {
     }
 }
 
-xp.incl.index.cov <- function (bootgam.obj = NULL,
-                               boot.type = NULL,
-                               main = NULL,
-                               xlb = "Index",
-                               ylb = "Covariate",
-                               add.ci = FALSE,
-                               incl.range = NULL,
-                               ... ) {
-
-    bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
-    if (is.null(bootgam.obj)) {
-        return()
-    }
-    boot.type <- get.boot.type (bootgam.obj)
-    as.num <- function (dat) { return (as.numeric(as.character(dat))) }
-
-    ## Sort out the titles
-    if(is.null(main)) {
-        main <- paste("Inclusion index for", bootgam.obj$runno)
-    }
-
-    se_idx <- function (p, q, n) {
-        A <- (p/n)*(1-(p/n))/n
-        B <- (q/n)*(1-(q/n))/n
-        rho <- 1  # cor (A,B)
-        se <- sqrt ( A + B + 2 * sqrt (A) * sqrt(B) * rho )
-        return (se)
-    }
-
-    inc_obs <- tail(bootgam.obj$incl.freq,1)
+#' Plot of inclusion index of covariates.
+#' 
+#' Covariate inclusion indices show the correlation in inclusion of a covariate
+#' in the final model in a bootgam or bootscm.
+#' 
+#' @param bootgam.obj The bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means
+#'   the user will be asked to make a choice.
+#' @param main Plot title.
+#' @param xlb Label for the x-axis.
+#' @param ylb Label for the y-axis.
+#' @param add.ci Add a confidence interval to the plotted data.
+#' @param incl.range Included range
+#' @param return_plot Should the function return a plot?
+#' @param results.tab Specify your own results table.
+#' @param ...  Additional plotting information.
+#'   
+#' @return A lattice plot object is returned.
+#' @author Ron Keizer
+#' @export
+#' 
+#' @family bootgam
+#' @family bootscm
+xp.incl.index.cov <- function (
+  bootgam.obj = NULL,
+  boot.type = NULL,
+  main = NULL,
+  xlb = "Index",
+  ylb = "Covariate",
+  add.ci = FALSE,
+  incl.range = NULL,
+  return_plot = TRUE,
+  results.tab = NULL,
+  ...) {
+  bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
+  if (is.null(bootgam.obj)) {
+    return()
+  }
+  boot.type <- get.boot.type(bootgam.obj)
+  as.num <- function(dat) {
+    return(as.numeric(as.character(dat)))
+  }
+  if (is.null(main)) {
+    main <- paste("Inclusion index for", bootgam.obj$runno)
+  }
+  se_idx <- function(p, q, n) {
+    A <- (p/n) * (1 - (p/n))/n
+    B <- (q/n) * (1 - (q/n))/n
+    rho <- 1
+    se <- sqrt(A + B + 2 * sqrt(A) * sqrt(B) * rho)
+    return(se)
+  }
+  inc_obs <- tail(bootgam.obj$incl.freq, 1)
+  if(!is.null(results.tab)) {
+    res <- results.tab
+  } else {
     res <- bootgam.obj$results.tab
-
-    ## filter out only covariates within specified inclusion freq range
-    if (is.null(incl.range)) {
-        incl.range <- ask.incl.range()
+  }
+  if (is.null(incl.range)) {
+    incl.range <- ask.incl.range()
+  }
+  if (length(incl.range) == 2) {
+    filter <- inc_obs > incl.range[1]/100 & inc_obs < incl.range[2]/100
+    res <- res[, filter]
+    inc_obs <- inc_obs[, filter]
+  }
+  n_cov <- length(inc_obs)
+  nam <- names(inc_obs)
+  if (!is.null(bootgam.obj$failed)) {
+    res <- res[bootgam.obj$failed == 0, ]
+  }
+  if (boot.type == "bootscm") {
+    cols.dum <- grep("^X.", colnames(res))
+    if (length(cols.dum) > 0) {
+      res <- res[, -cols.dum]
     }
-    if (length(incl.range) == 2) {
-        filter <- inc_obs > incl.range[1]/100 & inc_obs < incl.range[2]/100
-        res <- res[,filter]
-        inc_obs <- inc_obs[,filter] # remove dummy columns
-    }
-    n_cov <- length(inc_obs)
-    nam <- names(inc_obs)
-
-    ## filter out failed scms
-    if (!is.null(bootgam.obj$failed)) {
-        res <- res[bootgam.obj$failed == 0,]
-    }
-    if (boot.type == "bootscm") {
-        cols.dum <- grep("^X.", colnames(res))
-        if (length(cols.dum)>0) {
-            res <- res[,-cols.dum]
-        }
-    }
-
-    cov_idx <- c()
-    for (i in 1:n_cov) {
-        sub <- res[res[,i]==1,]
-        obs <- apply (sub, 2, sum)
-        n <- length(sub[,1])
-        expect <- inc_obs * n
-        idx <- as.num((obs/n) / as.num (inc_obs[i]) * as.num(inc_obs)) - 1
-        se <- 0
-        if (add.ci == TRUE) {
-            se <- unlist (se_idx(p = obs, q = expect, n = length(res[,1])))
-        }
-        cov_idx <- data.frame (rbind (cov_idx, cbind ("COV1" = nam[i], "COV2" = nam, idx, se, "lbnd" = (idx-(1.96*se)), "ubnd"=(idx+(1.96*se)))))
-    }
-
-    p <- dotplot (as.factor(COV1) ~ as.num(idx) | as.factor(COV2),
-                  data=cov_idx,
-                  plot.zero=TRUE,
-                  main = main,
-                  xlab = xlb,
-                  ylab = ylb,
-                  lx = as.num(cov_idx$lbnd), ux = as.num(cov_idx$ubnd),
-                  prepanel = prepanel.ci,
-                  panel = panel.ci,
-                  ... )
-    return(p)
+  }
+  cov_idx <- c()
+  n <- length(res[, 1])
+  for (i in 1:n_cov) {
+    sub <- res[res[, i] == 1, ]
+    obs <- apply(sub, 2, sum)
+    expect <- inc_obs * n
+    idx <- as.num((obs/n)) - (as.num(inc_obs[i])*as.num(inc_obs))
+    idx[i] <- NA
+    se <- 0
+    # RK: removed for now, not correct and problably not useful
+    # if (add.ci == TRUE) {
+    #   se <- unlist(se_idx(p = obs, q = expect, n = length(res[, 1])))
+    # }
+    cov_idx <- data.frame(rbind(cov_idx, cbind(COV1 = nam[i],
+                                               COV2 = nam, idx, se, lbnd = (idx - (1.96 * se)),
+                                               ubnd = (idx + (1.96 * se)))))
+  }
+  if(return_plot) {
+    p <- dotplot(as.factor(COV1) ~ as.num(idx) | as.factor(COV2),
+                 data = cov_idx, plot.zero = TRUE, main = main, xlab = xlb,
+                 ylab = ylb, lx = as.num(cov_idx$lbnd), ux = as.num(cov_idx$ubnd),
+                 prepanel = prepanel.ci,
+                 panel = panel.ci,
+                 ...)
+  } else {
+    return(cov_idx)
+  }
+  return(p)
 }
 
 ask.cov.name <- function (bootgam.obj = NULL) {
@@ -562,42 +700,76 @@ ask.cov.name <- function (bootgam.obj = NULL) {
 }
 
 
+#' Individual inclusion index
+#'
+#' This function will generate a plot of individual inclusion indexes for a
+#' specific covariate, which can be used to identify influential
+#' individuals for inclusion of that covariate. The index for an individual is calculated as
+#' the observed number of inclusions of that individual when the specific
+#' covariate was included minus the expected number of inclusions (based
+#' on the total bootstrap inclusions), divided by expected.
+#'
+#' @param bootgam.obj A bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means the user
+#' will be asked to make a choice.
+#' @param cov.name The name of the covariate for which to create the plot.
+#' @param main The title of the plot.
+#' @param ylb The label for the x-axis.
+#' @param xlb The label for the y-axis.
+#' @param return_plot Should a plot object be returned?
+#' @param results.tab Supply your own results table.
+#' @param ... Additional plotting parameters.
+#'
+#' @return A lattice plot object is returned.
+#' @author Ron Keizer
+#' @export
+#' 
+#' @family bootgam
+#' @family bootscm
+# @examples
 xp.incl.index.cov.ind <- function (bootgam.obj = NULL,
                                    boot.type = NULL,
                                    cov.name = NULL,
                                    main = NULL,
                                    ylb = "ID",
                                    xlb = "Individual inclusion index",
+                                   return_plot = TRUE,
+                                   results.tab = NULL,
                                    ... ) {
     bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
     if (is.null(bootgam.obj)) {
-        return()
+      return()
     }
     boot.type <- get.boot.type (bootgam.obj)
 
     as.num <- function (dat) { return (as.numeric(as.character(dat))) }
 
     if (is.null(cov.name)) {
-        cov.name <- ask.cov.name(bootgam.obj)
+      cov.name <- ask.cov.name(bootgam.obj)
     }
     if (is.null(cov.name)) { return() }
 
     if(is.null(main)) {
-        main <- paste ("Individual inclusion index (", cov.name, " on ", bootgam.obj$parnam, ") for ", bootgam.obj$runno, sep="")
+      main <- paste ("Individual inclusion index (", cov.name, " on ", bootgam.obj$parnam, ") for ", bootgam.obj$runno, sep="")
+    }
+    if(!is.null(results.tab)) {
+      res <- results.tab
+      bootgam.obj$oid <- bootgam.obj$oid[1:length(results.tab[,1]),]
+    } else {
+      res <- bootgam.obj$results.tab
     }
 
     ids <- colnames(bootgam.obj$oid)
     oid.cnt <- apply (bootgam.obj$oid, 2, sum)
-    res <- bootgam.obj$results.tab
 
     if (!is.null(bootgam.obj$failed)) {
-        res <- res[bootgam.obj$failed == 0,]
+      res <- res[bootgam.obj$failed == 0,]
     }
     oid.rel <- oid.cnt / length(res[,1])
     nam <- names(res)
 
     cov_idx <- c()
-    sub <- bootgam.obj$oid[res[,cov.name == nam]==1,]
+    sub <- bootgam.obj$oid[res[, cov.name == nam]==1,]
     obs <- apply (sub, 2, sum)
     n <- length(sub[,1])
     idx <- (as.num(obs) / (n * as.num(oid.rel))) - 1
@@ -606,19 +778,44 @@ xp.incl.index.cov.ind <- function (bootgam.obj = NULL,
 
     cov_idx <- data.frame(cbind ("idn" = ids[ord], "idx" = as.num(idx[ord])))
     scales <- list(y = list (labels = rev(cov_idx$idn)), cex=c(0.7,1))
-    p <- xyplot (factor(idn, levels=rev(idn)) ~ as.num(idx),
-                 data =cov_idx,
-                 main = main,
-                 xlab = xlb,
-                 ylab = ylb,
-                 scales = scales,
-                 lx = 0, ux = 0, plot.zero=TRUE,
-                 prepanel = prepanel.ci,
-                 panel = panel.ci,
-                 ... )
-    return (p)
+    if(return_plot) {
+      p <- xyplot (factor(idn, levels=rev(idn)) ~ as.num(idx),
+                   data = cov_idx,
+                   main = main,
+                   xlab = xlb,
+                   ylab = ylb,
+                   scales = scales,
+                   lx = 0, ux = 0, plot.zero=TRUE,
+                   prepanel = prepanel.ci,
+                   panel = panel.ci,
+                   ... )
+      return (p)
+    } else {
+      return(cov_idx)
+    }
 }
 
+
+
+#' Inclusion index individuals, compare between covariates.
+#' 
+#' A plot showing the range of inclusion indices for individuals for all
+#' covariates. This plot can be used to evaluate whether there were covariates
+#' which were more influenced by the constituency of the bootstrapped dataset
+#' than others.
+#' 
+#' 
+#' @param bootgam.obj A bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means
+#' the user will be asked to make a choice.
+#' @param main The title of the plot.
+#' @param xlb The label for the x-axis.
+#' @param ylb The label for the y-axis.
+#' @param \dots Additional plotting parameters.
+#' @return A lattice plot object is returned.
+#' @author Ron Keizer
+#' @keywords ~bootgam ~bootscm
+#' @export xp.incl.index.cov.comp
 xp.incl.index.cov.comp <- function (bootgam.obj = NULL,
                                     boot.type = NULL,
                                     main = NULL,
@@ -667,6 +864,26 @@ xp.incl.index.cov.comp <- function (bootgam.obj = NULL,
     return (p)
 }
 
+
+
+#' Inclusion frequency plot
+#' 
+#' Plot the inclusion frequencies of covariates in the final models obtained in
+#' a bootgam or bootscm. Covariates are ordered by inclusion frequency.
+#' 
+#' 
+#' @param bootgam.obj The bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means
+#' the user will be asked to make a choice.
+#' @param main Plot title
+#' @param col Color used for the plot.
+#' @param xlb Label for x-axis.
+#' @param ylb Label for y-axis.
+#' @param \dots Additional plotting parameters.
+#' @return A lattice plot object will be returned.
+#' @author Ron Keizer
+#' @keywords ~bootgam ~bootscm
+#' @export xp.inc.prob
 xp.inc.prob <- function (bootgam.obj = NULL,
                          boot.type = NULL,
                          main = NULL,
@@ -726,6 +943,25 @@ xp.inc.prob <- function (bootgam.obj = NULL,
     return(pl)
 }
 
+
+
+#' Inclusion frequency plot for combination of covariates.
+#' 
+#' Plot the inclusion frequency of the most common 2-covariate combinations.
+#' 
+#' 
+#' @param bootgam.obj The bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means
+#' the user will be asked to make a choice.
+#' @param main Plot title
+#' @param col Color used for plot.
+#' @param xlb Label for x-axis.
+#' @param ylb Label for y-axis.
+#' @param \dots Additional plotting parameters.
+#' @return A lattice plot object will be returned.
+#' @author Ron Keizer
+#' @keywords ~bootgam ~bootscm
+#' @export xp.inc.prob.comb.2
 xp.inc.prob.comb.2 <- function (bootgam.obj = NULL,
                                 boot.type = NULL,
                                 main = NULL,
@@ -809,41 +1045,110 @@ panel.ci <- function(x, y, lx, ux, subscripts, pch = 16, plot.zero = FALSE, ...)
     panel.xyplot(x, y, pch = pch, ...)
 }
 
+#'   Inclusion stability plot
+#'   
+#'   A plot of the inclusion frequency of covariates vs bootgam/bootscm
+#'   iteration number. This plot can be used to evaluate whether sufficient
+#'   iterations have been performed.
+#'
+#' @param bootgam.obj The bootgam or bootscm object.
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, 
+#' which means the user will be asked to make a choice.
+#' @param main Plot title
+#' @param normalize Should the plot be normalized?
+#' @param split.plots Should the plots be split?
+#' @param xlb The label for the x-axis.
+#' @param ylb The label for the y-axis.
+#' @param ... Additional plotting parameters
+#'
+#' @return A lattice plot object is returned.
+#' @author Ron Keizer
+#' @export
+#'
+#' @family bootgam
+#' @family bootscm
+#' 
+# @examples
 xp.inc.stab.cov <- function (bootgam.obj = NULL,
                              boot.type = NULL,
                              main = NULL,
+                             normalize = TRUE,
+                             split.plots = FALSE,
                              xlb = "Bootstrap replicate number",
-                             ylb = "Inclusion frequency",
+                             ylb = "Difference of estimate with final",
                              ...) {
-    ## Create a plot of inclusion frequency (y) versus bootstrap replicate number (x)
-    bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
-    if (is.null(bootgam.obj)) {
-        return()
-    }
-    boot.type <- get.boot.type (bootgam.obj)
+  
+  var <- NULL
+  
+  ## Create a plot of d(inclusion frequency-final inclusion freq) versus bootstrap replicate number (x)
+  bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
+  if (is.null(bootgam.obj)) {
+    return()
+  }
+  boot.type <- get.boot.type (bootgam.obj)
 
-    if(is.null(main)) {
-        main <- paste("Inclusion stability for", bootgam.obj$runno)
-    }
-    freq <- bootgam.obj$incl.freq
-    if (!is.null(bootgam.obj$failed)) {
-        freq <- freq[bootgam.obj$failed==0,]
-    }
-    freq <- data.frame (cbind (row = seq(along = freq[,1]), freq ))
-    freq.long <- reshape (freq,
-                          ids=row.names(freq), varying = names(freq)[-1],
-                          idvar = "row", timevar = "var", v.names = "value",
-                          times = names(freq)[-1], direction="long")
+  if(is.null(main) && !is.null(bootgam.obj$runno) && bootgam.obj$runno != "") {
+    main <- paste("Inclusion stability for", bootgam.obj$runno)
+  }
+  freq <- bootgam.obj$incl.freq
+  if(normalize) {
+    freq <- apply(bootgam.obj$incl.freq, 2, function(x) { x - tail(x,1) } )
+  }
+  if (!is.null(bootgam.obj$failed)) {
+    freq <- freq[bootgam.obj$failed==0,]
+  }
+  freq <- data.frame (cbind (row = seq(along = freq[,1]), freq))
+  freq.long <- reshape (freq,
+                        ids=row.names(freq), varying = names(freq)[-1],
+                        idvar = "row", timevar = "var", v.names = "value",
+                        times = names(freq)[-1], direction="long")
+  if(split.plots) {
     pl <- xyplot (value ~ row | var,
                   data = freq.long,
                   main = main,
                   xlab = xlb,
                   ylab = ylb,
                   type = "l",
+                  panel=function(...) {
+                    panel.abline(h = 0, col="#888888")
+                    panel.xyplot(...)
+                  },
                   ...)
-    return (pl)
+  } else {
+    pl <- xyplot (value ~ row,
+                  groups = var,
+                  col = rgb(0.4, 0.4, 0.4, 0.7),
+                  data = freq.long,
+                  main = main,
+                  xlab = xlb,
+                  ylab = ylb,
+                  type = "l",
+                  panel=function(...) {
+                    panel.abline(h = 0, col='steelblue', lwd=2)
+                    panel.xyplot(...)
+                  },
+                  ...)
+  }
+  return (pl)
 }
 
+
+
+#' OFV difference (optimism) plot.
+#' 
+#' A plot of the difference in OFV between final bootscm models and the
+#' reference final scm model.
+#' 
+#' 
+#' @param bootscm.obj The bootgam or bootscm object.
+#' @param main Plot title.
+#' @param xlb Label for x-axis.
+#' @param ylb Label for y-axis.
+#' @param \dots Additional plotting parameters.
+#' @return A lattice plot object is returned.
+#' @author Ron Keizer
+#' @keywords ~bootgam ~bootscm
+#' @export xp.dofv.plot
 xp.dofv.plot <- function (bootscm.obj = NULL,
                           main = NULL,
                           xlb = "Difference in OFV",
@@ -880,4 +1185,298 @@ get.boot.type <- function (bootscm.obj) {
         boot.type <- "bootscm"
     }
     return(boot.type)
+}
+
+#' Trace plots for conditional indices
+#'
+#' @inheritParams xp.dofv.npar.plot
+#' @inheritParams xp.inc.stab.cov
+#' @param boot.type Either "bootgam" or "bootscm". Default is NULL, which means
+#'   the user will be asked to make a choice.
+#' @param normalize Should one normalize?
+#' @param split.plots Should the plots be split?
+#'
+#' @return A lattice plot object.
+#' @export
+#'
+#' @family bootgam
+#' @family bootscm
+# @examples
+xp.inc.cond.stab.cov <- function (
+  ## trace plots for conditional indices
+  bootgam.obj = NULL,
+  boot.type = NULL,
+  main = NULL,
+  xlb = "Bootstrap replicate number",
+  ylb = "Conditional inclusion frequency",
+  normalize = TRUE,
+  split.plots = FALSE,
+  ...) {
+  
+    label <- NULL
+    var <- NULL
+    
+    bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
+    if (is.null(bootgam.obj)) {
+      return()
+    }
+    boot.type <- get.boot.type(bootgam.obj)
+    if (is.null(main) && !is.null(bootgam.obj$runno) && bootgam.obj != "") {
+      main <- paste("Conditional index stability for", bootgam.obj$runno)
+    }
+
+    ## get inclusion frequency from bootscm object
+    res <- c()
+    for(i in 1:length(bootgam.obj$incl.freq[,1])) {
+      tmp <- xp.incl.index.cov(bootgam.obj = bootgam.obj, return_plot = FALSE, results.tab = bootgam.obj$results.tab[1:i,], incl.range = c(20,80))
+      tmp <- tmp[tmp$COV1 != tmp$COV2,]
+      res <- rbind(res, cbind(i, as.character(tmp$COV1), as.character(tmp$COV2), as.numeric(as.character(tmp$idx))))
+    }
+    res <- data.frame(res)
+    colnames(res) <- c("id", "COV1", "COV2", "value")
+    res$id <- as.numeric(as.character(res$id))
+    res$value <- as.numeric(as.character(res$value))
+    res$label <- paste0(res$COV1, "-", res$COV2)
+    if(normalize) {
+      unq <- unique(res$label)
+      lst <- res[res$id == max(res$id),]
+      for(i in seq(unique(res$label))) {
+        res[res$label == unq[i],]$value <- res[res$label == unq[i],]$value - lst[lst$label == unq[i],]$value
+      }
+    }
+    if(split.plots) {
+      pl <- xyplot(value ~ id | factor(label), data = res, main = main,
+                   xlab = xlb, ylab = ylb, type = "l",
+                   panel=function(...) {
+                     panel.abline(h = 0, col="#888888")
+                     panel.xyplot(...)
+                   }, ...)
+    } else {
+      pl <- xyplot(value ~ id, data = res, main = main,
+                   groups = label,
+                   col = rgb(0.4, 0.4, 0.4, 0.5),
+                   panel=function(...) {
+                     panel.abline(h = 0, col='steelblue', lwd=2)
+                     panel.xyplot(...)
+                   },
+                   xlab = xlb, ylab = ylb, type = "l", ...)
+    }
+    return(pl)
+}
+
+
+
+#' Trace plots for conditional indices rper replicate number
+#'
+#' @inheritParams xp.dofv.npar.plot
+#' @inheritParams xp.inc.cond.stab.cov
+#' @inheritParams xp.inc.stab.cov
+#' 
+#' @param limits Limits for the inclusion index.
+#' @param start When to start.
+#' @param ... Arguments passed to other functions.
+#'
+#' @return A lattice plot object.
+#' @export
+#'
+#' @family bootgam
+#' @family bootscm
+# @examples
+xp.inc.ind.cond.stab.cov <- function (
+  ## trace plots for conditional indices
+  bootgam.obj = NULL,
+  boot.type = NULL,
+  main = NULL,
+  xlb = "Bootstrap replicate number",
+  ylb = "Conditional inclusion frequency",
+  limits = c(.2, .8),
+  normalize = TRUE,
+  split.plots = FALSE,
+  start = 25,
+  ...) {
+  
+    label <- NULL
+    idn <- NULL
+  
+    bootgam.obj <- get.boot.obj(bootgam.obj, boot.type)
+    if (is.null(bootgam.obj)) {
+      return()
+    }
+    boot.type <- get.boot.type(bootgam.obj)
+    if (is.null(main) && !is.null(bootgam.obj$runno) && bootgam.obj != "") {
+      main <- paste("Conditional index stability for", bootgam.obj$runno)
+    }
+
+    ## get inclusion frequency from bootscm object
+    res <- c()
+
+    # get list of covariate names that have 20-80% inclusion index
+    sel <- c(tail(bootgam.obj$incl.freq,1) > limits[1] & tail(bootgam.obj$incl.freq,1) < limits[2])
+    cov_list <- names(bootgam.obj$incl.freq[sel])
+
+    message("Calculating conditional inclusion indices per bootstrap iteration...")
+    pb <- txtProgressBar(min = 0, max = length(bootgam.obj$incl.freq[,1]), initial = 0)
+    res <- c()
+    for(i in start:length(bootgam.obj$incl.freq[,1])) {
+      setTxtProgressBar(pb, i)
+      dat_i <- c()
+      for(j in seq(cov_list)) {
+        tmp <- xp.incl.index.cov.ind(bootgam.obj = bootgam.obj,
+                                     return_plot = FALSE,
+                                     results.tab = bootgam.obj$results.tab[1:i,],
+                                     cov.name = cov_list[j])
+        tmp <- tmp[order(tmp$idn),]
+        if(j == 1) {
+          dat_i <- tmp
+          colnames(dat_i)[2] <- cov_list[j]
+        } else {
+          dat_i[[cov_list[j]]] <- tmp$idx
+        }
+      }
+      res <- rbind(res, dat_i) # can be implemented faster!
+    }
+    res <- data.frame(res)
+    res$n <- rep(start:length(bootgam.obj$incl.freq[,1]), each = length(dat_i[,1]))
+    res.long <- reshape (res,
+                          ids=row.names(res), varying = names(res)[-c(1, length(res[1,]))],
+                          idvar = "row", timevar = "var", v.names = "value",
+                          times = names(res)[-c(1, length(res[1,]))], direction="long")
+    res.long$label <- paste0(res.long$var, "_", res.long$idn)
+    if(normalize) {
+      message("Normalizing...")
+      pb2 <- txtProgressBar(min = 0, max = length(unique(res.long$label)), initial = 0)
+      unq <- unique(res.long$label)
+      lst <- res.long[res.long$n == max(res$n),]
+      for(i in seq(unique(res.long$label))) {
+        setTxtProgressBar(pb2, i)
+        res.long[res.long$label == unq[i],]$value <- res.long[res.long$label == unq[i],]$value - lst[lst$label == unq[i],]$value
+      }
+    }
+
+    message("Plotting...")
+    if(split.plots) {
+      pl <- xyplot(value ~ n | var, data = res.long, main = main,
+                   group = idn, col = "#888888",
+                   xlab = xlb, ylab = ylb, type = "l",
+                   panel=function(...) {
+                     panel.abline(h = 0, col="steelblue")
+                     panel.xyplot(...)
+                   }, ...)
+    } else {
+      pl <- xyplot(value ~ n, data = res.long, main = main,
+                   groups = label,
+                   col = rgb(0.4, 0.4, 0.4, 0.25),
+                   panel=function(...) {
+                     panel.abline(h = 0, col='steelblue', lwd=2)
+                     panel.xyplot(...)
+                   },
+                   xlab = xlb, ylab = ylb, type = "l", ...)
+    }
+    return(pl)
+}
+
+#' Distribution of difference in OFV 
+#'
+#' @param bootscm.obj a bootscm object.
+#' @param main The title of the plot
+#' @param xlb The x-label of the plot
+#' @param ylb The y-label of the plot
+#' @param ... Additional parameters passed to \code{panel.xyplot} and \code{xyplot}.
+#'
+#' @return A lattice plot object.
+#' @export
+#'
+#' @family bootgam
+#' @family bootscm
+#' 
+# @examples
+xp.dofv.npar.plot <- function (bootscm.obj = NULL, main = NULL, xlb = "Difference in OFV",
+                               ylb = "Density", ...)  {
+  bootscm.obj <- get.boot.obj(bootscm.obj, boot.type = "bootscm")
+  if (is.null(bootscm.obj)) {
+    return()
+  }
+  if (is.null(main)) {
+    main <- paste("Distribution of dOFV for", bootscm.obj$runno)
+  }
+  size <- as.numeric(apply(cbind(bootscm.obj$results.tab, bootscm.obj$results.tab.dum), 1, "sum"))
+  size_orig <- sum(bootscm.obj$results.tab.orig)
+  dofv <- bootscm.obj$dofv$dOFV[-1]
+  ofv <- bootscm.obj$dofv$OFV[-1]
+  ofv_original <- bootscm.obj$ofv_original
+  data <- data.frame(cbind(n = 1:length(size), size, dofv, ofv, ofv_original))
+  data$class <- 0
+  chi <- data.frame(cbind(x = c(-4, -3, -2, -1, 0, 1, 2, 3, 4) + size_orig,
+                          y = c(qchisq(p = 0.95, df = c(4, 3, 2, 1)), 0, -qchisq(p = 0.95, df = c(1, 2, 3, 4))) ))
+  data$class <- as.numeric(data$dofv <= chi$y[match(data$size, chi$x)])
+  bg <- c(rgb(0.5,0.5,0.5,0.5), "darkblue")
+  sz <- c(1, 1)
+  font_sz <- c(0.5, .75)
+  font_col <- c(rgb(1,1,1,0), "white")
+  message("Models with largest dOFV:")
+  print(data[order(data$dofv),][1:10,])
+  pl <- xyplot(dofv ~ size, data=data,
+               ylab = "dOFV",
+               xlab = "Covariate model size",
+               pch = 19,
+               panel = function(...) {
+                llines (x=chi$x, y=chi$y)
+                panel.abline(h = 0, lty = "dotted", col = "black")
+                panel.abline(v = size_orig, lty = "dotted", col = "black")
+                panel.xyplot(..., cex = sz[data$class+1], col=bg[data$class+1])
+            #    panel.text(size, dofv, labels = data$n, cex=font_sz[data$class+1], col=font_col[data$class+1])
+               }, ...)
+  return(pl)
+}
+
+
+#' Distribution of difference in AIC 
+#'
+#' @param bootscm.obj a bootscm object.
+#' @param main The title of the plot
+#' @param xlb The x-label of the plot
+#' @param ylb The y-label of the plot
+#' @param ... Additional parameters passed to \code{panel.xyplot} and \code{xyplot}.
+#'
+#' @return A lattice plot object.
+#' @export
+#'
+#' @family bootgam
+#' @family bootscm
+# @examples
+xp.daic.npar.plot <- function (bootscm.obj = NULL, main = NULL, xlb = "Difference in AIC",
+                               ylb = "Density", ...)  {
+  bootscm.obj <- get.boot.obj(bootscm.obj, boot.type = "bootscm")
+  if (is.null(bootscm.obj)) {
+    return()
+  }
+  if (is.null(main)) {
+    main <- paste("Distribution of dAIC for", bootscm.obj$runno)
+  }
+  size <- as.numeric(apply(cbind(bootscm.obj$results.tab, bootscm.obj$results.tab.dum), 1, "sum"))
+  size_orig <- sum(bootscm.obj$results.tab.orig)
+  dofv <- bootscm.obj$dofv$dOFV[-1]
+  ofv <- bootscm.obj$dofv$OFV[-1]
+  ofv_original <- bootscm.obj$ofv_original
+  data <- data.frame(cbind(n = 1:length(size), size, size_orig, ofv, dofv, ofv_original, class = 0))
+  # AIC = 2k - 2log(L)
+  # dAIC = 2k1 * log(L1) - 2k2 * log(L2)
+  data$daic <- (2 * data$size + data$ofv) - (2 * data$size_orig + data$ofv_original)
+  data$class <- as.numeric(data$daic <= 0)
+  bg <- c(rgb(0.5,0.5,0.5,0.5), "darkblue")
+  sz <- c(1, 1)
+  font_sz <- c(0.5, .75)
+  font_col <- c(rgb(1,1,1,0), "white")
+  message("Models with largest dAIC:")
+  print(data[order(data$daic),][1:20,])
+  pl <- xyplot(daic ~ size, data=data,
+               ylab = "dAIC", xlab = "Covariate model size",
+               pch = 19,
+               panel = function(...) {
+                 panel.abline(h = 0, lty = "dotted", col = "black")
+                 panel.abline(v = size_orig, lty = "dotted", col = "black")
+                 panel.xyplot(..., cex = sz[data$class+1], col=bg[data$class+1])
+                 #  panel.text(data$size, data$daic, labels = data$n, cex=font_sz[data$class+1], col=font_col[data$class+1])
+               }, ...)
+  return(pl)
 }

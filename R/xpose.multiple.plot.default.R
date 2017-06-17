@@ -1,28 +1,37 @@
-# Xpose 4
-# An R-based population pharmacokinetic/
-# pharmacodynamic model building aid for NONMEM.
-# Copyright (C) 1998-2004 E. Niclas Jonsson and Mats Karlsson.
-# Copyright (C) 2005-2008 Andrew C. Hooker, Justin J. Wilkins, 
-# Mats O. Karlsson and E. Niclas Jonsson.
-# Copyright (C) 2009-2010 Andrew C. Hooker, Mats O. Karlsson and 
-# E. Niclas Jonsson.
+#' Xpose 4 generic function for plotting multiple lattice objects on one page
+#' 
+#' Function takes a list of \pkg{lattice} plot objects and prints them in a
+#' multiple plot layout with a title.
+#' 
+#' \strong{Additional arguments:} \describe{ \item{title.x}{Where the title
+#' should be placed in the title \pkg{grid} region} \item{title.y}{Where the
+#' title should be placed in the title \pkg{grid} region} \item{title.just}{how
+#' the title should be justified} \item{title.gp}{The par parameters for the
+#' title (see \pkg{grid})} }
+#' 
+#' @param plotList A list of lattice plot objects such that plot object i can
+#' be called with \code{plotList[[i]]}
+#' @param plotTitle The title used for the multiple plot layout
+#' @param prompt If more than one page is needed do you want a prompt at the
+#' command line before the next page is printed
+#' @param new.first.window Should the first page of this plot be in the already
+#' opened window or should a new window be created
+#' @param max.plots.per.page Maximum number of plots per page in the multiple
+#' layout
+#' @param title Look of title using \pkg{grid}.
+#' @param mirror if the list contains mirror plots
+#' @param bql.layout should we use layout optimized for BQL measurements?
+#' @param page.numbers Should we add page numbers to multiple page plots?
+#' @param \dots Other arguments passed to the code in this function
+#' @return returns nothing
+#' @author Andrew Hooker
+#' @seealso \pkg{grid}, \code{\link{basic.gof}}, \code{\link{parm.vs.parm}},
+#' \code{\link{parm.vs.cov}},
+#' @export 
+#' @importFrom grDevices dev.cur
+#' @importFrom grDevices dev.off
 
-# This file is a part of Xpose 4.
-# Xpose 4 is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Lesser General Public License
-# as published by the Free Software Foundation, either version 3
-# of the License, or (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-
-# You should have received a copy of the GNU Lesser General Public License
-# along with this program.  A copy can be cound in the R installation
-# directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
-
-"xpose.multiple.plot.default" <-
+xpose.multiple.plot.default <-
   function(plotList,
            plotTitle=NULL,
            prompt=FALSE,
@@ -183,7 +192,7 @@
             #trellis.device(new=FALSE,...)#, theme = canonical.theme(theme))
             ##trellis.par.set(theme = col.whitebg())
           } else { # turn on recording if there are more than one page to print
-            xpose.dev.new(record=TRUE,...) # record only pased to windows
+            xpose.dev.new(record=TRUE,...) # record only passed to windows
             grid.newpage()
             #trellis.device(new=FALSE,...)#, theme = canonical.theme(theme))
             ##trellis.par.set(theme = col.whitebg())

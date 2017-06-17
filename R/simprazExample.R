@@ -21,6 +21,34 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
+
+
+#' Function to create files for the simulated prazosin example in Xpose
+#' 
+#' Creates NONMEM data, model and output files for a model of prazosin using
+#' simulated data.
+#' 
+#' Creates files in the current working directory named: run1.ext run1.lst
+#' run1.mod simpraz.dta xptab1
+#' 
+#' @param overwrite Logical. Should the function overwrite files with the same
+#' names already in the current working directory?
+#' @author Niclas Jonsson and Andrew Hooker
+#' @keywords methods
+#' @examples
+#' 
+#' od = setwd(tempdir()) # move to a temp directory
+#' (cur.files <- dir()) # current files in temp directory
+#' 
+#' simprazExample(overwrite=TRUE) # write files
+#' 
+#' (new.files <- dir()[!(dir() %in% cur.files)])  # what files are new here?
+#' 
+#' file.remove(new.files) # remove these files
+#' setwd(od)  # restore working directory
+#' 
+#' @export simprazExample
+#' @family data functions 
 simprazExample <- function(overwrite=FALSE) {
 
   writeMod <- function() {
@@ -1383,7 +1411,6 @@ ID TIME IPRED IWRES CWRES CL V KA ETA1 ETA2 ETA3 AGE HT WT SECR SEX RACE SMOK HC
 65 9 20.559 -0.0077409 0.30669 9.5706 141.07 1.0608 -0.61758 0.60809 -0.30738 64 180 99.79 1.1 1 1 0 0 0 1 0 20.4 9.6859 10.714 0.35509
 65 10 19.212 -0.056329 0.086922 9.5706 141.07 1.0608 -0.61758 0.60809 -0.30738 64 180 99.79 1.1 1 1 0 0 0 1 0 18.13 7.6874 10.443 0.29468
 65 12 16.775 0.20297 2.3031 9.5706 141.07 1.0608 -0.61758 0.60809 -0.30738 64 180 99.79 1.1 1 1 0 0 0 1 0 20.18 4.8422 15.338 5.9987
-
 "
         )
                                         #data("xptab1")

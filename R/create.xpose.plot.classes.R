@@ -22,18 +22,29 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"create.xpose.plot.classes" <- function()
+
+
+#' Create xpose.multiple.plot class.
+#' 
+#' Creates a class for viewing and plotting xpose plots with multiple plots on
+#' the same page or multiple pages.
+#' 
+#' 
+#' @aliases create.xpose.plot.classes print,xpose.multiple.plot-method
+#' @author Niclas Jonsson and Andrew C. Hooker
+#' @export 
+create.xpose.plot.classes <- function()
 {
   
-  ## setClassUnion("character or NULL",c("character","NULL"))
-  ## setClassUnion("character or numeric",c("character","numeric"))
-  ## setClassUnion("numeric or NULL",c("numeric","NULL"))
-  ## setClassUnion("data.frame or NULL",c("data.frame","NULL"))
-  ## setClassUnion("list or NULL",c("list","NULL"))
-  ## setClassUnion("lang or numeric",c("vector","numeric","list"))
-  ## setClassUnion("logical or numeric",c("logical","numeric"))
+  setClassUnion("character or NULL",c("character","NULL"))
+  setClassUnion("character or numeric",c("character","numeric"))
+  setClassUnion("numeric or NULL",c("numeric","NULL"))
+  setClassUnion("data.frame or NULL",c("data.frame","NULL"))
+  setClassUnion("list or NULL",c("list","NULL"))
+  setClassUnion("lang or numeric",c("vector","numeric","list"))
+  setClassUnion("logical or numeric",c("logical","numeric"))
 
-  setClass("xpose.multiple.plot",where=.GlobalEnv,
+  setClass("xpose.multiple.plot",#where=.GlobalEnv,
            representation(plotList           = "list or NULL",
                           plotTitle          = "character or NULL",
                           prompt             = "logical",

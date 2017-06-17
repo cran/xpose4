@@ -22,6 +22,8 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
+#' @describeIn xpose.yscale.components.log10 Make log tic marks
+#' @export
 xpose.logTicks <- function (lim, loc = c(1, 5)) {
   ii <- floor(log10(range(lim))) + c(-1, 2)
   main <- 10^(ii[1]:ii[2])
@@ -29,6 +31,40 @@ xpose.logTicks <- function (lim, loc = c(1, 5)) {
   r[lim[1] <= r & r <= lim[2]]
 }  
 
+
+
+#' Functions to create nice looking axes when using Log scales.
+#' 
+#' The functions are used to create standard tic marks and axis labels when the
+#' axes are on the log scale.
+#' 
+#' These functions create log scales that look like they should (not the
+#' default R scales). These functions are used as input to the
+#' \code{\link[lattice:axis.default]{xscale.components}} argument in a lattice
+#' plot.
+#' 
+#' @aliases xpose.yscale.components.log10 xpose.xscale.components.log10
+#' xpose.logTicks
+#' @param lim Limits
+#' @param loc Locations
+#' @param \dots Additional arguments passed to the function.
+#' @author Andrew Hooker
+#' @seealso \code{\link{xpose.plot.default}}
+#' \code{\link[lattice:axis.default]{xscale.components}}
+#' @keywords methods
+#' @examples
+#' 
+#' \dontrun{
+#' xpdb5 <- xpose.data(5)
+#' xpose.plot.default("PRED","DV",xpdb,logy=T,logx=T)
+#' xpose.plot.default("PRED","DV",xpdb,logy=T,logx=T,
+#'                    yscale.components = xpose.yscale.components.log10,
+#'                    xscale.components = xpose.xscale.components.log10)
+#' 
+#' ## both give the same result
+#' }
+#' 
+#' @export 
 xpose.yscale.components.log10 <- function(lim, ...) {
   ans <- yscale.components.default(lim = lim, ...)
   tick.at <- xpose.logTicks(10^lim, loc = 1:9)
@@ -43,6 +79,8 @@ xpose.yscale.components.log10 <- function(lim, ...) {
   ans
 }
 
+#' @describeIn xpose.yscale.components.log10 Make log scale on x-axis
+#' @export
 xpose.xscale.components.log10 <- function(lim, ...) {
   ans <- xscale.components.default(lim = lim, ...)
   tick.at <- xpose.logTicks(10^lim, loc = 1:9)

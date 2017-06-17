@@ -1,7 +1,12 @@
 Xpose 4
 ====================
 
-by Andrew C. Hooker, Justin J. Wilkins, Mats O. Karlsson 
+[![Travis-CI Build Status](https://travis-ci.org/UUPharmacometrics/xpose4.svg?branch=master)](https://travis-ci.org/UUPharmacometrics/xpose4)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/xpose4)](https://CRAN.R-project.org/package=xpose4) 
+[![codecov.io](https://codecov.io/github/UUPharmacometrics/xpose4/coverage.svg?branch=master)](https://codecov.io/github/UUPharmacometrics/xpose4?branch=master)
+
+
+by Andrew C. Hooker, Mats O. Karlsson 
 and E. Niclas Jonsson
 
 http://xpose.sourceforge.net/
@@ -9,24 +14,18 @@ http://xpose.sourceforge.net/
 
 ## Introduction
 
-Xpose 4 is a ground-floor rewrite of Xpose 3.1. Chief amongst the enhancements
-in the new version is the migration from S-PLUS to R, a free,
-multi-platform statistical environment.  We have also added direct access to Xpose
-functions from the command line, and, through R, access to Xpose tools by
-third-party applications.
+Xpose 4 is a collection of functions to be used as a model
+building aid for nonlinear mixed-effects (population) analysis
+using NONMEM. It facilitates data set checkout, exploration and
+visualization, model diagnostics, candidate covariate identification
+and model comparison.
 
 
-## R and required package installation
+## R installation
 
 To install xpose you will need:
 
-* R version >=2.2.0. Download the latest version of R from www.r-project.org.
-* the gam package. Install the latest version from CRAN.  Write at the R command
-line (type `?install.packages` in R for more details):
-
-```
-install.packages("gam")
-```
+* R version >=2.2.0. Download the latest version of R from http://www.r-project.org.
 
 
 ## Xpose 4 Installation
@@ -46,17 +45,7 @@ i.e. `make` and compilers must be installed on your system -- see the R FAQ for 
 you may also need to install dependencies manually.
 
 ```
-devtools::install_github("xpose4",username="andrewhooker")
-```
-
-
-## Additional recommended packages
-
-The Hmisc package is also recommended.  to install, write at the R command line
-(type `?install.packages` in R for more details):
-
-```
-install.packages("Hmisc")
+devtools::install_github("UUPharmacometrics/xpose4")
 ```
 
 

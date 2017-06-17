@@ -25,6 +25,29 @@
 ## Added by Justin Wilkins
 ## 28/11/2005
 
+
+
+#' Quantile-quantile plot of individual weighted residuals (IWRES), for Xpose 4
+#' 
+#' This is a QQ plot of the distribution of individual weighted residuals
+#' (IWRES) in the dataset, a specific function in Xpose 4. It is a wrapper
+#' encapsulating arguments to the \code{xpose.plot.qq} function.
+#' 
+#' Displays a QQ plot of the individual weighted residuals (IWRES).
+#' 
+#' @param object An xpose.data object.
+#' @param \dots Other arguments passed to \code{link{xpose.plot.qq}}.
+#' @return Returns a QQ plot of individual weighted residuals (IWRES).
+#' @author E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins
+#' @seealso \code{\link{xpose.plot.qq}}, \code{\link{xpose.panel.qq}},
+#' \code{\link[lattice]{qqmath}}, \code{\link{xpose.prefs-class}},
+#' \code{\link{xpose.data-class}}
+#' @keywords methods
+#' @examples
+#' iwres.dist.qq(simpraz.xpdb)
+#' 
+#' @export iwres.dist.qq
+#' @family specific functions 
 "iwres.dist.qq" <-
   function(object,
            ...) {
