@@ -7,6 +7,9 @@
 \usage{
 change.xvardef(object, var = ".ask", def = ".ask", listall = TRUE,
   classic = FALSE, check.var = FALSE, ...)
+
+change.xvardef(object, var, listall = FALSE, classic = FALSE,
+  check.var = FALSE, ...) <- value
 }
 \arguments{
 \item{object}{An \code{xpose.data} object.}
@@ -29,6 +32,8 @@ is an internal option.}
 variables in the object?}
 
 \item{\dots}{Items passed to functions within this function.}
+
+\item{value}{a vector of values}
 }
 \value{
 If called from the the command line then this function returns an
@@ -41,6 +46,12 @@ These functions allow for the changing of Xpose variable definitions like
 the observed data in a generic way, so that generic plotting functions can
 be created.
 }
+\section{Functions}{
+\itemize{
+\item \code{change.xvardef<-}: Change the covariate scope of
+the xpose database object
+}}
+
 \section{Additional arguments}{
  \strong{The default xpose variables are:\cr}
 \describe{ \item{id}{Individual identifier column in dataset}
@@ -55,7 +66,9 @@ database} }
 
 \examples{
 
-\dontrun{
+## Here we load the example xpose database 
+xpdb <- simpraz.xpdb
+
 # Change the "id" variable to point to "PRED" in the xpose object
 xpdb <- change.xvardef(xpdb,var="id",def="PRED")
 
@@ -68,6 +81,7 @@ change.xvardef(xpdb,var="idv") <- "TIME"
 # Change the covariate scope
 change.xvardef(xpdb,var="covariates") <- c("SEX","AGE","WT")
 
+\dontrun{
 # Use the interactive capabilities of the function
 xpdb <- change.xvardef(xpdb)
 }
