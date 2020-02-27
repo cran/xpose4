@@ -4,8 +4,13 @@
 \alias{xpose.bootgam}
 \title{Title}
 \usage{
-xpose.bootgam(object, n = n, id = object@Prefs@Xvardef$id, oid = "OID",
-  seed = NULL, parnam = xvardef("parms", object)[1],
+xpose.bootgam(
+  object,
+  n = n,
+  id = object@Prefs@Xvardef$id,
+  oid = "OID",
+  seed = NULL,
+  parnam = xvardef("parms", object)[1],
   covnams = xvardef("covariates", object),
   conv.value = object@Prefs@Bootgam.prefs$conv.value,
   check.interval = as.numeric(object@Prefs@Bootgam.prefs$check.interval),
@@ -14,7 +19,9 @@ xpose.bootgam(object, n = n, id = object@Prefs@Xvardef$id, oid = "OID",
   start.mod = object@Prefs@Bootgam.prefs$start.mod,
   liif = as.numeric(object@Prefs@Bootgam.prefs$liif),
   ljif.conv = as.numeric(object@Prefs@Bootgam.prefs$ljif.conv),
-  excluded.ids = as.numeric(object@Prefs@Bootgam.prefs$excluded.ids), ...)
+  excluded.ids = as.numeric(object@Prefs@Bootgam.prefs$excluded.ids),
+  ...
+)
 }
 \arguments{
 \item{object}{An xpose.data object.}
@@ -57,6 +64,7 @@ Title
 }
 \examples{
 
+\dontrun{
 ## filter out occasion as a covariate as only one value
 all_covs <- xvardef("covariates",simpraz.xpdb)
 some_covs <- all_covs[!(all_covs \%in\% "OCC") ] 
@@ -64,10 +72,15 @@ some_covs <- all_covs[!(all_covs \%in\% "OCC") ]
 ## here only running n=5 replicates to see that things work
 ##   use something like n=100 for resonable results
 boot_gam_obj <- xpose.bootgam(simpraz.xpdb,5,parnam="KA",covnams=some_covs,seed=1234)
+}
 
 }
 \seealso{
-Other GAM functions: \code{\link{GAM_summary_and_plot}},
-  \code{\link{xp.get.disp}}, \code{\link{xp.scope3}},
-  \code{\link{xpose.gam}}, \code{\link{xpose4-package}}
+Other GAM functions: 
+\code{\link{GAM_summary_and_plot}},
+\code{\link{xp.get.disp}()},
+\code{\link{xp.scope3}()},
+\code{\link{xpose.gam}()},
+\code{\link{xpose4-package}}
 }
+\concept{GAM functions}

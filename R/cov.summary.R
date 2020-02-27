@@ -35,12 +35,8 @@
 #' \code{\link{xpose.data-class}}, \code{\link[Hmisc]{print.char.matrix}}
 #' @keywords methods
 #' @examples
-#' ## Here we load the example xpose database 
-#' xpdb <- simpraz.xpdb
 #' 
-#' parm.summary(xpdb)
-#' 
-#' cov.summary(xpdb)
+#' parm.summary(simpraz.xpdb)
 #' 
 #' @name  par_cov_summary
 #' @family data functions 
@@ -48,17 +44,17 @@ NULL
 
 #' @describeIn  par_cov_summary Covariate summary
 #' @export
-"cov.summary" <- function(object,
-                          onlyfirst=TRUE,
-                          subset=xsubset(object),
-                          inclZeroWRES=FALSE,
-                          out.file=".screen", # can be ".ask" ".graph" or a file name,
-                          #out.file.sep=",",
-                          main="Default",
-                          fill = "gray",
-                          values.to.use=xvardef("covariates",object),
-                          value.name="Covariate",
-                          ...){
+cov.summary <- function(object,
+                        onlyfirst=TRUE,
+                        subset=xsubset(object),
+                        inclZeroWRES=FALSE,
+                        out.file=".screen", # can be ".ask" ".graph" or a file name,
+                        #out.file.sep=",",
+                        main="Default",
+                        fill = "gray",
+                        values.to.use=xvardef("covariates",object),
+                        value.name="Covariate",
+                        ...){
 
   
   return(parm.summary(object,
