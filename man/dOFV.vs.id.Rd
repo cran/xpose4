@@ -21,8 +21,8 @@ dOFV.vs.id(
   tot.line.col = "grey",
   tot.line.lty = "dashed",
   key = list(columns = 1, lines = list(pch = c(super.sym$pch[1:2], NA, NA), type =
-    list("o", "o", "l", "l"), col = c(super.sym$col[1:2], sig.line.col, tot.line.col), lty
-    = c(super.sym$lty[1:2], sig.line.lty, tot.line.lty)), text =
+    list("o", "o", "l", "l"), col = c(super.sym$col[1:2], sig.line.col, tot.line.col),
+    lty = c(super.sym$lty[1:2], sig.line.lty, tot.line.lty)), text =
     list(c(expression(paste(Delta, OFV[i] < 0)), expression(paste(Delta, OFV[i] > 0)),
     expression(paste("Significant  ", Delta, OFV)), expression(paste("Total  ", Delta,
     OFV)))), corner = c(0.95, 0.5), border = T),
@@ -120,7 +120,8 @@ Other specific functions:
 \code{\link{cwres.vs.idv}()},
 \code{\link{cwres.vs.pred.bw}()},
 \code{\link{cwres.vs.pred}()},
-\code{\link{cwres_wres_vs_x}},
+\code{\link{cwres.wres.vs.idv}()},
+\code{\link{cwres.wres.vs.pred}()},
 \code{\link{dOFV.vs.cov}()},
 \code{\link{dOFV1.vs.dOFV2}()},
 \code{\link{data.checkout}()},
