@@ -1,6 +1,6 @@
-1cad63ca9b0f832a3f86bcd6df366abb *DESCRIPTION
+bde4c77433868658fbf89af671b14711 *DESCRIPTION
 b610874261566de5db5c97055272e5d2 *NAMESPACE
-45f928078dea575b7284d874d89fd7fa *NEWS.md
+7a6eb551a8260778c342dfa57e4b4865 *NEWS.md
 179dd2d7d1def300a34cb71aeee0b132 *R/Data.R
 e522a693527d49d0fb2adb0ae4572ecc *R/PI.helper.R
 1cd3d3a24c63ed96ef0dd9d53971d4d7 *R/SData.R
@@ -77,7 +77,7 @@ b56428c96e94434359dc0899d53bb2cd *R/change.xlabel.R
 95f0a5439736ca8fbf6750abbe142d0d *R/change.xvardef.R
 cf340038f89d78ef6c19d832df5f743e *R/check.gamobj.R
 54c0314ce431f2771d0b161112de61af *R/check.vars.R
-8bec16ad3c543329dc217f77969787a8 *R/compute.cwres.R
+66c986784d7f299f3e8e5cdeeb1cea11 *R/compute.cwres.R
 189715d22bbfa669775aedf977fe8f52 *R/computePI.R
 a4d848652d57d14153cadf0a4a5d8f2f *R/continuous.table.R
 5160aafb2515ca88aac74f44176e56c9 *R/cov.hist.R
@@ -148,7 +148,7 @@ e88046bb28ffaeeeb09acdaa93b39fcf *R/make.sb.data.R
 4f810ffcf488b0766e04842b49ef3f74 *R/manage.db.R
 e7abd81bd96e4c76513401aae8bc9ed9 *R/model.comparison.covariates.menu.R
 84e509703f132a4e81b008429ae3df37 *R/model.comparison.menu.R
-e15024352f8bfb3b3829d02bc4f7edd0 *R/npc.coverage.R
+55ba6c989777cebdbd7f6ffc45df0e81 *R/npc.coverage.R
 204e6377f21b0d0aa3183229d07c8e06 *R/nsim.R
 3068772dea73472b456b625fa825278f *R/parameters.menu.R
 c81ead617505c870b16bf77f42037a1d *R/parm.hist.R
@@ -174,7 +174,7 @@ b47a5583401f79c2243ff154cd4dcfdb *R/read.lst7.R
 52bbc65efa2cb6fce0b69f375af95c93 *R/read.npc.vpc.results.R
 de55f0b91349495a4a14404e7734397c *R/read.phi.R
 55207d1023d1ae544581053e90a9e732 *R/read.vpctab.R
-916fb318b05a56b41604f191bca0bcc6 *R/read_nm_table.R
+a5a4ecdb89c4af320c492ccf6f53d254 *R/read_nm_table.R
 dd53a2cf6aaa9b255fd60b53195676e2 *R/reset.graph.par.R
 b331529eb11c302a837007ccce91db69 *R/residual.diagnostics.menu.R
 98763c2fd648024486cbe3e9f1b050ba *R/runsum.R
@@ -226,7 +226,7 @@ c9c50ecbaf904e5ecc9d03d870d885dc *R/xpose.panel.histogram.R
 306911df2416709f50038775aa91f09f *R/xpose.panel.qq.R
 39d228caebbe0a5faf3e8b37671c23cd *R/xpose.panel.splom.R
 62e6f3e98de41f93d7f734eef4e83a4a *R/xpose.plot.bw.R
-f9a73c1d776cfa63af73062ccab80ac2 *R/xpose.plot.default.R
+793a4dd0456b06b9679cec99f205a331 *R/xpose.plot.default.R
 cb779bfdbbbd5c19a46e04d49a739004 *R/xpose.plot.histogram.R
 0e5a22d1d28886f73fb86ee40c7e62ba *R/xpose.plot.qq.R
 4c2dd79caa3998aa6203bb62b7098fa0 *R/xpose.plot.splom.R
@@ -236,11 +236,12 @@ cb779bfdbbbd5c19a46e04d49a739004 *R/xpose.plot.histogram.R
 090c074a834b8bf0b4fb137a9fe375ab *R/xpose.string.print.R
 cfdbfd7a7623cdf08af6ca0e50a34bdb *R/xpose.write.R
 4c6608678b0dc7bb65d4867abb442ba7 *R/xpose4-package.R
-39a9bdf6717ba0a6095d43f52b198973 *R/xpose4.R
+25ec5a9019ec6a0c4686f8baba22de75 *R/xpose4.R
 41e0bb32d820a8b459c748b1d1916971 *R/xsubset.R
 f174d62fe8e7a3c4869e02156d3a5939 *R/xvardef.R
 b821787c001cd5d7097843b7f4fe0325 *R/zzz.R
-758a70355b76d3541ddac8cdf0352f85 *README.md
+9d599cf0d495de1d476ba3a21f316b71 *README.md
+1961639f6f4f7f9efffa91b624b3d060 *build/partial.rdb
 8efbbb3d45e91a1513deaaddd69f0e60 *data/simpraz.xpdb.RData
 ee158c60b03e1fe416bdee07233616b7 *inst/CITATION
 e36a6299a4350b7ce5baab95df9934db *inst/xpose.ini
@@ -273,7 +274,7 @@ cec3373449668ffdd4b4c9566c140994 *man/boot.hist.Rd
 0af5bb855f04cf4e71312afe976a5196 *man/bootgam.print.Rd
 1a82da56ae19b65925ef4aa165a5683d *man/bootscm.import.Rd
 141b833061b05ec75864a55c4e5992ec *man/cat.dv.vs.idv.sb.Rd
-393a403641d181500f75b53900ea8937 *man/cat.pc.Rd
+e7028e2ca93ce16be228bd4c4f35ce98 *man/cat.pc.Rd
 2a6f976f096a1a7ef59dfcdf089ce942 *man/categorical.table.Rd
 6bafaf4bee75370edbda78d0edbddb5c *man/change.parm.Rd
 444352174721938da645c46cb7c6b573 *man/change.var.name.Rd
@@ -282,7 +283,7 @@ a960dbd355ccef2e86a846c4af6e6853 *man/change.xlabel.Rd
 58e58cfb8c497e0cbe0f9f950c2885d3 *man/change_graphical_parameters.Rd
 56a719a78b9ad9f450e18d44db33b8d9 *man/change_misc_parameters.Rd
 89d225bea607eba4be06c2d508772169 *man/check.vars.Rd
-eccb568c7d0e34eab7cb959aba87297b *man/compute.cwres.Rd
+1f073518bb753c110ca073d7e93b8862 *man/compute.cwres.Rd
 78b50052e55bf6a7b201cae41dae5daf *man/create.mirror.Rd
 9c0e88529e9fdcbdb6c66f42919d85cd *man/create.xpose.plot.classes.Rd
 5d41b303b9b99a8d67b09a4145089d77 *man/createXposeClasses.Rd
@@ -312,7 +313,7 @@ bc7d1bb664e4302ca1371a34d9b35436 *man/dv.vs.pred.by.cov.Rd
 72f49be923248c00f2d840b81de52989 *man/dv.vs.pred.ipred.Rd
 e9ea76920ce9f42778d0ffde6b220b31 *man/export.graph.par.Rd
 69fcd6111af1cc18c93e0427eb644eb2 *man/export.variable.definitions.Rd
-47c6266b055284198f29300dff212557 *man/figures/readme_example_figure_1-1.png
+bc5293d3c4697d491e13df71b9dfb4de *man/figures/readme_example_figure_1-1.png
 99d559d15853ce1177068d4cee6b49c9 *man/figures/xposelogo.png
 3ee056914a01e3636dcce31b6bde1f83 *man/find.right.table.Rd
 63f52bac222b47c3ee3908edccea17fe *man/gof.Rd
@@ -327,7 +328,7 @@ f97fac69bc93296425b1f617bee94277 *man/ind.plots.Rd
 d36503245c36b5f533206e613716cd59 *man/iwres.vs.idv.Rd
 625b3f8582c804378c9afb55ef67481a *man/kaplan.plot.Rd
 40f8cdd11710b32dab69a1e2a4c67e50 *man/make.sb.data.Rd
-26bcf884589f86aca41d02a5e0bc61ab *man/npc.coverage.Rd
+90f39f37d8290f94b80edc01563fdb86 *man/npc.coverage.Rd
 5be0bf6eb06a6b8d3e4fb8c6c3467017 *man/nsim.Rd
 1859c9cc76ca46ebf35338679ea4de36 *man/par_cov_hist.Rd
 32d56650e6d9ef81119d079858ad53f8 *man/par_cov_qq.Rd
@@ -395,7 +396,7 @@ d2592563431700c13d7ee405760472f6 *man/xpose.multiple.plot.Rd
 1a5e270260d0ec13c575e794567b2470 *man/xpose.panel.qq.Rd
 1c1660e107fee8d59aeb9fc4c5e6db1e *man/xpose.panel.splom.Rd
 720c88cce5d652aea1e5df0df9fc3416 *man/xpose.plot.bw.Rd
-9bf191cb8d044f3ab5c3a16689933321 *man/xpose.plot.default.Rd
+0fa9b2faf7b452ba34796e85bf480cec *man/xpose.plot.default.Rd
 ae02245e2d4b81ef2226c581efe82cc0 *man/xpose.plot.histogram.Rd
 e4ac5a92b97758c0fcb5b74df775e6c8 *man/xpose.plot.qq.Rd
 70533401bdb72dbaff0d648124308f08 *man/xpose.plot.splom.Rd
@@ -411,4 +412,4 @@ cb124f4fd15a2bd956256a2526adde53 *man/xpose4-package.Rd
 c101d4088cdc336f501a76b0265ca7a0 *tests/testthat/helper_functions.R
 afe6d1d3ff24fff891be9412046b82ca *tests/testthat/helper_options.R
 be0aaed7c39e285da1bd3bb20dc226f5 *tests/testthat/test_minimal_example.R
-988a2d7cf748bb313ce1786a777f8bde *tests/testthat/test_reading_data.R
+e6fea925e0ef7be2b39bdb2925cb2817 *tests/testthat/test_reading_data.R

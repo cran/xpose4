@@ -1,3 +1,11 @@
+# xpose 4.7.2
+
+* Changed default method of reading table files to the "slow" method, 
+  so that xpose.data(..other arguments.., method="slow") is default. 
+  For other methods see ?read_nm_table
+
+* Other small changes
+
 # xpose4 4.7.1
 
 * Fix a bug where the filtering of "-99" rows of table files would not filter on all plotting variables.  

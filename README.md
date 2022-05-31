@@ -5,13 +5,9 @@
 
 <!-- badges: start -->
 
-[![Travis-CI Build
-Status](https://travis-ci.org/UUPharmacometrics/xpose4.svg?branch=master)](https://travis-ci.org/UUPharmacometrics/xpose4)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/7nng74105x1g0b5v?svg=true)](https://ci.appveyor.com/project/andrewhooker/xpose4)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/xpose4)](https://CRAN.R-project.org/package=xpose4)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/xpose4)](https://CRAN.R-project.org/package=xpose4)
 [![codecov.io](https://codecov.io/github/UUPharmacometrics/xpose4/coverage.svg?branch=master)](https://codecov.io/github/UUPharmacometrics/xpose4?branch=master)
-[![R-CMD-check](https://github.com/UUPharmacometrics/xpose4/workflows/R-CMD-check/badge.svg)](https://github.com/UUPharmacometrics/xpose4/actions)
+[![R-CMD-check](https://github.com/UUPharmacometrics/xpose4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/UUPharmacometrics/xpose4/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 by Andrew C. Hooker, Mats O. Karlsson and E. Niclas Jonsson
@@ -28,17 +24,17 @@ diagnostics, candidate covariate identification and model comparison.
 To install xpose you will need R (\>= version 2.2.0).  
 To install Xpose in R use one of the following methods:
 
-  - latest stable release – From CRAN. Write at the R command line:
-    
+-   latest stable release – From CRAN. Write at the R command line:
+
     ``` r
     install.packages("xpose4")
     ```
 
-  - Latest development version – from Github. Note that the command
+-   Latest development version – from Github. Note that the command
     below installs the “master” (development) branch; if you want the
     release branch from Github add `ref="release"` to the
     `install_github()` call.
-    
+
     ``` r
     # install.packages("devtools")
     devtools::install_github("UUPharmacometrics/xpose4")
@@ -102,7 +98,7 @@ our Bestiarium: <http://xpose.sourceforge.net/bestiarium_v1.0.pdf>
 
 ## Don’t Panic
 
-Andrew Hooker (andrew.hooker at farmbio.uu.se) should be able to get you
+Andrew Hooker (andrew.hooker at farmaci.uu.se) should be able to get you
 an answer if you run into trouble. The website
 <https://uupharmacometrics.github.io/xpose4/> should also be of help.
 
@@ -121,8 +117,9 @@ option) any later version.
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
-General Public License for more details <http://www.gnu.org/licenses/>.
+General Public License for more details <https://www.gnu.org/licenses/>.
 
 ## Known Bugs
 
-None at present, but there will certainly be a few
+None at present, but there will certainly be a few. Report them at
+<https://github.com/UUPharmacometrics/xpose4/issues>.
