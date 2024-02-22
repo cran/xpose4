@@ -1,6 +1,6 @@
 Package: xpose4
 Title: Diagnostics for Nonlinear Mixed-Effect Models
-Version: 4.7.2
+Version: 4.7.3
 Authors@R: c(person("Andrew C.","Hooker",role=c("aut","cre","cph"),email="andrew.hooker@farmaci.uu.se"),
              person("Mats O.","Karlsson",role=c("aut","cph")),
              person("Justin J.","Wilkins",role="aut"),
@@ -27,10 +27,10 @@ Copyright: 2009-2022 Andrew C. Hooker, E. Niclas Jonsson and Mats O.
         Karlsson. 2005-2008 Andrew C. Hooker, Justin J. Wilkins, Mats
         O. Karlsson and E. Niclas Jonsson. 1998-2004 E. Niclas Jonsson
         and Mats Karlsson.
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.1
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2022-05-31 08:24:08 UTC; ancho179
+Packaged: 2024-02-22 09:37:29 UTC; ancho179
 Author: Andrew C. Hooker [aut, cre, cph],
   Mats O. Karlsson [aut, cph],
   Justin J. Wilkins [aut],
@@ -38,4 +38,4 @@ Author: Andrew C. Hooker [aut, cre, cph],
   Ron Keizer [ctb] (functionality for bootstrap of GAM and SCM)
 Maintainer: Andrew C. Hooker <andrew.hooker@farmaci.uu.se>
 Repository: CRAN
-Date/Publication: 2022-05-31 16:00:02 UTC
+Date/Publication: 2024-02-22 10:00:03 UTC

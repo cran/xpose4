@@ -1,10 +1,16 @@
+# xpose 4.7.3
+
+* Updated `ind.plots()` so that the "fine grid" method in NONMEM works. In this approach, we simulate in NONMEM using a dense grid of time points, all non-observed DV items are equal to zero, allowing for better resolution of the IPRED and PRED curve in the plot.
+
+* Changes in documentation.
+
 # xpose 4.7.2
 
 * Changed default method of reading table files to the "slow" method, 
   so that xpose.data(..other arguments.., method="slow") is default. 
   For other methods see ?read_nm_table
 
-* Other small changes
+* Other small changes.
 
 # xpose4 4.7.1
 
